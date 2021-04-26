@@ -58,3 +58,9 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+*.meta
+Project_ShootingStarV2/Assets/Models/UnityChan/License/
+Project_ShootingStarV2/Library/metadata/
+Project_ShootingStarV2/Library/PackageCache/
+Project_ShootingStarV2/Library/ShaderCache/
+Project_ShootingStarV2/Temp/
