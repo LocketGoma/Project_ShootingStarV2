@@ -534,7 +534,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400328, guid: 49f2055d53eeb4e5a92af590a44bddee, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: 400328, guid: 49f2055d53eeb4e5a92af590a44bddee, type: 3}
       propertyPath: m_LocalRotation.x
@@ -769,6 +769,7 @@ GameObject:
   - component: {fileID: 1666901852}
   - component: {fileID: 1666901851}
   - component: {fileID: 1666901853}
+  - component: {fileID: 1666901854}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -788,7 +789,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbe281277806f404cb13ab60be5b5824, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.5
+  speed: 2.5
   jumpPower: 10
   anim: {fileID: 1413789608}
   inputH: 0
@@ -830,6 +831,20 @@ MonoBehaviour:
   power: 1
   text: {fileID: 0}
   autoCharge: 0
+--- !u!114 &1666901854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1666901850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca850c2ce4ac11349b62159d28237d20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toolState: 0
+  anim: {fileID: 0}
 --- !u!1001 &1743871344
 PrefabInstance:
   m_ObjectHideFlags: 0
