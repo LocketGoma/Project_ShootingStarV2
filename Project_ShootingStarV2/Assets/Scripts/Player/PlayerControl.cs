@@ -24,7 +24,7 @@ public class PlayerControl : MonoBehaviour
     private void Start()
     {
         power = minPower;
-        // text.text = power.ToString();
+         text.text = power.ToString();
        // inventory = Inventory.instance;
     }
 
@@ -38,7 +38,7 @@ public class PlayerControl : MonoBehaviour
             if (power > maxPower || autoCharge)
                 power = maxPower;
 
-            //text.text = power.ToString();
+            text.text = power.ToString();
         }
 
         if (Input.GetKeyDown(KeyCode.LeftControl))

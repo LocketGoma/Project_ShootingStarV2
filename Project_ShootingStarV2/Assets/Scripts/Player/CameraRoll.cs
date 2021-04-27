@@ -45,8 +45,7 @@ public class CameraRoll : MonoBehaviour
         if (clampInDegrees.y < 360)
         {
             mouseAbsolute.y = Mathf.Clamp(mouseAbsolute.y, -clampInDegrees.y * gab, clampInDegrees.y * gab);
-        }
-        Debug.Log(-mouseAbsolute.y);
+        }       
 
         transform.localRotation = Quaternion.AngleAxis(-mouseAbsolute.y, targetOrientation * Vector3.right); //여기는 최종 절대값으로 (시작지점)
 

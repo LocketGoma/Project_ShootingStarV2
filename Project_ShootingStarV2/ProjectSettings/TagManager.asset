@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - DeadSpace
+  - Item
+  - PlayerAvatar
+  - CounterMove
   layers:
   - Default
   - TransparentFX
