@@ -669,7 +669,7 @@ PrefabInstance:
     - target: {fileID: 1109708898913608978, guid: 311c14fc2f47af449924ddf33df880cb,
         type: 3}
       propertyPath: controlMode
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1109708898913608979, guid: 311c14fc2f47af449924ddf33df880cb,
         type: 3}
