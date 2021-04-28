@@ -23,6 +23,8 @@ public class BSPRoomGenerator : MonoBehaviour
 
     private BinaryTree roomTree;
 
+    public BinaryTree RoomBinaryTree { get; }
+
     void Start()
     {
         if (maxTry <= 0)

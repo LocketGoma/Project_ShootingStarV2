@@ -18,11 +18,11 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Wall&Floor
+  - Player
+  - Items
+  - PlayerWeapon
+  - EnemyWeapon
   - 
   - 
   - 

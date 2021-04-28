@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 prevPosA;           //1차 (계속 갱신됨)
     private Vector3 prevPosB;           //2차 (한 프레임 늦게 갱신됨)
 
+    private bool collisionWall = false;
     public enum InputMode
     {
         PC,Mobile
@@ -57,14 +58,14 @@ public class PlayerMovement : MonoBehaviour
         moveX = ReduceMovement(inputH) * speed * Time.deltaTime;
         moveZ = ReduceBackMovement(inputV) * speed * Time.deltaTime;
 
-        transform.Translate(moveX, 0f, moveZ);
+        if (collisionWall != true)        
+            transform.Translate(moveX, 0f, moveZ);
 
         transform.rotation = Quaternion.Euler(0, transform.GetChild(1).transform.rotation.eulerAngles.y, 0);
 
         if (Input.GetKey(KeyCode.Space))
         {
-            anim.PlayInFixedTime("Jump01", 0, 0.35f);
-            //anim.Play("Jump01", 0, 0f);                
+            anim.PlayInFixedTime("Jump01", 0, 0.35f);       
         }
 
         if (Input.GetKeyUp(KeyCode.Space) && jumpState == false)
@@ -86,6 +87,20 @@ public class PlayerMovement : MonoBehaviour
             runState = false;
             runWeight = 0;
         }
+
+        //Ray ray = new Ray(transform.GetChild(0).transform.position, transform.GetChild(0).transform.forward);
+        //RaycastHit hit;
+        //Physics.Raycast(ray, out hit, 0.75f);
+        //if (hit.collider.tag == "Untagged")
+        //{
+        //    collisionWall = true;
+        //}
+        //else
+        //{
+        //    collisionWall = false;
+        //}
+        //Debug.DrawRay(transform.GetChild(0).transform.position, transform.GetChild(0).transform.forward,Color.green);
+
     }
     
 
@@ -110,8 +125,10 @@ public class PlayerMovement : MonoBehaviour
     {        
         if (other.gameObject.tag == "Untagged")
         {
-            transform.Translate(-moveX, 0f, -moveZ);
+            RevokeCall();
+           //transform.GetChild(0).localPosition = new Vector3(0.02f, 0.0f, -0.1f);
         }
+        
     }
 
     public void DragControl(Vector3 dir)
@@ -138,10 +155,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isInvokeCooltime == false)
         {
-            Invoke("SavePosition", 0.1f);
+            Invoke("SavePosition", 0.15f);
             isInvokeCooltime = true;
         }
-
     }
 
     public void RevokePosition()

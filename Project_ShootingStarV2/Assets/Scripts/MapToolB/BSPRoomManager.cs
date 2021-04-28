@@ -109,6 +109,7 @@ public class BSPRoomManager : MonoBehaviour
 
     public void SaveRoom()
     {
+        Debug.Log(roomListData.Count);
         jsonParser.Writer(roomListData);
     }
 

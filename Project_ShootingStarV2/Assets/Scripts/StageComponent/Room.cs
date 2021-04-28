@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Room : MonoBehaviour
 {
-    [SerializeField] private int RoomNo;   //방 번호
-    [SerializeField] private int Axis_LX;
-    [SerializeField] private int Axis_LY;   //2차원 기준, 3차원일때는 Y값 -> Z값으로 변경.
-    [SerializeField] private int Axis_RX;
-    [SerializeField] private int Axis_RY;
+    [SerializeField] protected int RoomNo;   //방 번호
+    [SerializeField] protected int Axis_LX;
+    [SerializeField] protected int Axis_LY;   //2차원 기준, 3차원일때는 Y값 -> Z값으로 변경.
+    [SerializeField] protected int Axis_RX;
+    [SerializeField] protected int Axis_RY;
 
 
     // Start is called before the first frame update
