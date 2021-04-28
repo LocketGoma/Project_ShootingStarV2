@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections;
+﻿using System.IO;
 using System.Collections.Generic;
-using System.Dynamic;
 using UnityEngine;
 
 //https://202psj.tistory.com/1261
@@ -22,10 +20,33 @@ public class JsonParser : MonoBehaviour
         if (LoadDataState == true) {
             loadData = JsonUtility.FromJson<LoadData>(LoadJson.ToString());
 
-
         } else {
             Debug.LogError("Json 파일 읽기 실패");
         }
+    }
+
+    public void Writer(HashSet<RoomData> roomListData)
+    {
+        string parseData = "{ \n  \"RoomCount\" : \" "+roomListData.Count+ "\", \n  \"Room\":[";
+
+        int roomNumber = 0;
+        foreach (RoomData rm in roomListData)
+        {
+            roomNumber++;
+            parseData += JsonUtility.ToJson(rm);
+
+            if (roomNumber < roomListData.Count)
+                parseData += ",\n";
+            else
+                parseData += "\n";
+        }
+        parseData += "  \n]\n}";
+
+        FileStream fileStream = new FileStream("./TestResult.json", FileMode.OpenOrCreate, FileAccess.Write);
+        StreamWriter writer = new StreamWriter(fileStream, System.Text.Encoding.Unicode);
+
+        writer.WriteLine(parseData);
+        writer.Close();
     }
 
 }

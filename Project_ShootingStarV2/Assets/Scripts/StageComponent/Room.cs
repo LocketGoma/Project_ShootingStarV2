@@ -14,10 +14,10 @@ public class Room : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (RoomManager.instance == null)
-        {
-            Debug.LogError("RoomManager Setting Error!");
-        }
+        //if (RoomManager.instance == null)
+        //{
+        //    Debug.LogError("RoomManager Setting Error!");
+        //}
     }
     public void Initialized(RoomData roomInput)
     {
@@ -27,6 +27,7 @@ public class Room : MonoBehaviour
         Axis_RX = roomInput.Axis_RX;
         Axis_RY = roomInput.Axis_RY;
 
+
         //Debug.Log(RoomNo);
 
         InitBatch();
@@ -34,7 +35,8 @@ public class Room : MonoBehaviour
 
     public void InitBatch()
     {
-        gameObject.transform.position = new Vector3(Axis_LX, 0, Axis_LY);
+        //gameObject.transform.position = new Vector3(Axis_LX, 0, Axis_LY);
+        gameObject.transform.position = new Vector3(Axis_LX + Mathf.Abs(Axis_LX-Axis_RX)/2,0.0f, Axis_LY+ Mathf.Abs(Axis_LY - Axis_RY)/2);
         gameObject.transform.localScale = new Vector3(Axis_RX - Axis_LX, 1, Axis_RY - Axis_LY);
 
     }
