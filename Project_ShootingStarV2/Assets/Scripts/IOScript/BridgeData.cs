@@ -1,8 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
-public class BridgeData : MonoBehaviour
+[Serializable]
+public class BridgeData
 {
     public int BridgeNo;    //브릿지 번호
     public int NodeRoomANo; //연결된 방 번호 A
@@ -16,6 +16,7 @@ public class BridgeData : MonoBehaviour
 
     public BridgeData() { BridgeNo = -1; Axis_LX = 0; Axis_LY = 0; Axis_RX = 1; Axis_RY = 1; }
     public BridgeData(int bridgeNo, int lx, int ly, int rx, int ry) { BridgeNo = bridgeNo; Axis_LX = lx; Axis_LY = ly; Axis_RX = rx; Axis_RY = ry; }
+    public BridgeData(int bridgeNo, int NodeANo, int NodeBNo, int lx, int ly, int rx, int ry) { BridgeNo = bridgeNo; NodeRoomANo = NodeANo; NodeRoomBNo = NodeBNo; Axis_LX = lx; Axis_LY = ly; Axis_RX = rx; Axis_RY = ry; }
     public BridgeData(int lx, int ly, int rx, int ry) { Axis_LX = lx; Axis_LY = ly; Axis_RX = rx; Axis_RY = ry; }
 
 

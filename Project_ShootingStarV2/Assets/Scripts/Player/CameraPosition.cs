@@ -27,8 +27,16 @@ public class CameraPosition : MonoBehaviour
     [Range(0.1f, 5.0f)]
     public float cameraShoulderGab = 1.0f;
 
+    private bool lerpRange = false;
+
+    private float originalCameraRange;
+    private float prevCameraRange;
+    private GameObject collisionObject;
+
     void Start()
     {
+        originalCameraRange = cameraRange;
+        prevCameraRange = cameraRange;
         cam = GetComponent<Camera>();
     }
 
@@ -45,6 +53,51 @@ public class CameraPosition : MonoBehaviour
             shoulderState = eShoulderState.Right;
         }
 
-        transform.position = targetHead.transform.position + (-transform.forward+(transform.up* cameraUp)+(transform.right*(cameraShoulderGab*((float)shoulderState-0.5f)*2))) * cameraRange;        
+        Debug.Log(lerpRange);
+
+        if (lerpRange == true)
+            cameraRange = Mathf.Lerp(cameraRange, originalCameraRange, Time.deltaTime*3.0f);
+
+        transform.position = targetHead.transform.position + (-transform.forward+(transform.up* cameraUp)+(transform.right*(cameraShoulderGab*((float)shoulderState-0.5f)*2))) * cameraRange;
+
+
+        //if (collisionObject != null && cameraRange < (collisionObject.transform.position - targetHead.transform.position).magnitude - (collisionObject.transform.localScale.magnitude/2))
+        //    lerpRange = true;
+
+        Ray ray = GetComponent<Camera>().ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+        ray.direction = -transform.forward;
+        Debug.DrawRay(ray.origin, ray.direction * cameraRange, new Color(1, 0, 0));
+        RaycastHit hit;
+        bool checkRayHit = Physics.Raycast(ray, out hit, cameraRange);
+        if (!checkRayHit)
+        {
+            //if (hit.collider.tag != "Player" && hit.collider.tag != "PlayerAvatar")
+            lerpRange = true;
+        }
+
+
+        prevCameraRange = cameraRange;
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag != "Player" && other.tag != "PlayerAvatar")
+        {
+            lerpRange = false;
+        }
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag != "Player" && other.gameObject.tag != "PlayerAvatar")
+        {
+            cameraRange = Mathf.Lerp(cameraRange, 0, Time.deltaTime * 3.0f);
+            lerpRange = false;            
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag != "Player" && other.gameObject.tag != "PlayerAvatar")
+        {
+            collisionObject = other.gameObject;            
+        }
     }
 }

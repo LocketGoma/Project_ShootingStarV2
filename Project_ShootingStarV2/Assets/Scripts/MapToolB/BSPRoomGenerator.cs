@@ -23,7 +23,7 @@ public class BSPRoomGenerator : MonoBehaviour
 
     private BinaryTree roomTree;
 
-    public BinaryTree RoomBinaryTree { get; }
+
 
     void Start()
     {
@@ -116,7 +116,20 @@ public class BSPRoomGenerator : MonoBehaviour
         nowNode.Right = new BinaryTreeNode(rm2);
 
         //최 하위 노드일때만 넣기
-        if (!GenerationRoomNode(iDepth+1, nowNode.Left)|| !GenerationRoomNode(iDepth + 1, nowNode.Right))
+        if (!GenerationRoomNode(iDepth+1, nowNode.Left))
+        {
+            RoomData data = nowNode.Data;
+            data.RoomNo = RoomList.Count + 1;
+            data.Axis_LX++;
+            data.Axis_LY++;
+            data.Axis_RX--;
+            data.Axis_RY--;
+
+            RoomList.Add(data);
+
+            return true;
+        }
+         if(!GenerationRoomNode(iDepth + 1, nowNode.Right))
         {
             RoomData data = nowNode.Data;
             data.RoomNo = RoomList.Count+1;
@@ -126,6 +139,8 @@ public class BSPRoomGenerator : MonoBehaviour
             data.Axis_RY--;
 
             RoomList.Add(data);
+
+            return true;
         }
 
         return true;

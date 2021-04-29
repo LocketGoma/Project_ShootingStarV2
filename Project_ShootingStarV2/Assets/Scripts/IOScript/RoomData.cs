@@ -34,12 +34,12 @@ public class RoomData {
     {
         RoomData data = (RoomData)o;
 
-        return this == data;
+        return (Axis_LX == data.Axis_LX && Axis_LY == data.Axis_LY && Axis_RX == data.Axis_RX && Axis_RY == data.Axis_RY);
     }
+
     public static bool operator ==(RoomData rm1, RoomData rm2)
     {
-        return (rm1.Axis_LX == rm2.Axis_LX && rm1.Axis_LY == rm2.Axis_LY && rm1.Axis_RX == rm2.Axis_RX && rm1.Axis_RY == rm2.Axis_RY);
-
+        return rm1.Axis_LX == rm2.Axis_LX && rm1.Axis_LY == rm2.Axis_LY && rm1.Axis_RX == rm2.Axis_RX && rm1.Axis_RY == rm2.Axis_RY;
     }
     public static bool operator !=(RoomData rm1, RoomData rm2)
     {

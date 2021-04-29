@@ -7,10 +7,14 @@ public class BSPRoomManager : MonoBehaviour
 {
     [SerializeField] private LoadData loadData;
     [SerializeField] private GameObject[] RoomList;     //Room List
+    [SerializeField] private GameObject[] BridgeList;     //Bridge List
     [SerializeField] private GameObject RoomSample;     //Room Sample Prefab
+    [SerializeField] private GameObject BridgeSample;     //Bridge Sample Prefab
     [SerializeField] private int roomCount;
+    [SerializeField] private int bridgeCount;
     [SerializeField] private JsonParser jsonParser;
     [SerializeField] private BSPRoomGenerator roomGenerator;
+    [SerializeField] private BSPBridgeGenerator bridgeGenerator;
 
 
     [SerializeField] private int makeCount;                  //필드 - 총 생성 개수
@@ -19,6 +23,7 @@ public class BSPRoomManager : MonoBehaviour
     [SerializeField] private int makeSize;                   //필드 - 각 블럭당 폭
 
     private HashSet<RoomData> roomListData;
+    private HashSet<BridgeData> bridgeListData;
     public int RoomCount { get { return roomCount; } set { roomCount = value; } }
 
     public void InputCount(Text text)
@@ -66,8 +71,8 @@ public class BSPRoomManager : MonoBehaviour
 
         for (int i = 0; i < roomCount; i++)
         {
-            Instantiate(RoomSample).transform.parent = gameObject.transform;
-            RoomList[i] = transform.GetChild(i).gameObject;
+            Instantiate(RoomSample).transform.parent = gameObject.transform.GetChild(0);
+            RoomList[i] = transform.GetChild(0).GetChild(i).gameObject;
             RoomList[i].GetComponent<Room>().Initialized(loadData.Room[i]);
         }
     }
@@ -89,13 +94,33 @@ public class BSPRoomManager : MonoBehaviour
         int i = 0;
         foreach (RoomData rm in roomListData)
         {
-            Instantiate(RoomSample).transform.parent = gameObject.transform;
-            RoomList[i] = transform.GetChild(i).gameObject;
+            Instantiate(RoomSample).transform.parent = gameObject.transform.GetChild(0);
+            RoomList[i] = transform.GetChild(0).GetChild(i).gameObject;
             RoomList[i].GetComponent<Room>().Initialized(rm);
 
-            Debug.Log(i);
             i++;
         }
+    }
+
+    public void MakeBridge()
+    {
+        bridgeGenerator.RoomListData = roomListData;        
+
+        bridgeGenerator.GenerateBridge();
+
+        bridgeListData = bridgeGenerator.GetBridgeList();
+        bridgeCount = bridgeListData.Count;
+        BridgeList = new GameObject[bridgeCount];
+
+        int i = 0;
+        foreach (BridgeData bm in bridgeListData)
+        {
+            Instantiate(BridgeSample).transform.parent = gameObject.transform.GetChild(1);
+            BridgeList[i] = transform.GetChild(1).GetChild(i).gameObject;
+            BridgeList[i].GetComponent<Bridge>().Initialized(bm);            
+            i++;
+        }
+
     }
 
     public void RoomReset()
@@ -110,9 +135,13 @@ public class BSPRoomManager : MonoBehaviour
     public void SaveRoom()
     {
         Debug.Log(roomListData.Count);
-        jsonParser.Writer(roomListData);
+        jsonParser.WriteRoom(roomListData);
     }
-
+    public void SaveBridge()
+    {
+        Debug.Log(bridgeListData.Count);
+        jsonParser.WriteBridge(bridgeListData);
+    }
 }
 
 
