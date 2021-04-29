@@ -53,8 +53,6 @@ public class CameraPosition : MonoBehaviour
             shoulderState = eShoulderState.Right;
         }
 
-        Debug.Log(lerpRange);
-
         if (lerpRange == true)
             cameraRange = Mathf.Lerp(cameraRange, originalCameraRange, Time.deltaTime*3.0f);
 

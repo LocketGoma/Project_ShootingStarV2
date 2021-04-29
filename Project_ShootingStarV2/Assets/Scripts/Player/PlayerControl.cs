@@ -66,7 +66,7 @@ public class PlayerControl : MonoBehaviour
         if (bullet != null)
         {
             Debug.Log("shoot");
-            Instantiate(bullet, transform.GetChild(1).transform.position, transform.rotation).GetComponent<Rigidbody>().AddForce(transform.GetComponentInChildren<CrossHair>().getTargetVector() * power, ForceMode.Impulse);
+            Instantiate(bullet, transform.GetChild(1).transform.position, transform.rotation).GetComponent<Rigidbody>().AddForce(transform.GetComponentInChildren<CrossHair>().getTargetVector() * power*bullet.GetComponent<Rigidbody>().mass, ForceMode.Impulse);
 
             //bullet = null;
         }

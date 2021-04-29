@@ -16,6 +16,7 @@ public class PlayerShooterController : MonoBehaviour
     }
     [SerializeField] private eMotionState motionState;
     [SerializeField] private eSkillState skillState;
+    [SerializeField] private bool ReadyState;
     [SerializeField] private bool shootState;
     [SerializeField] private Animator anim;
     [SerializeField] private Text text;
@@ -36,14 +37,27 @@ public class PlayerShooterController : MonoBehaviour
         anim.SetInteger("WeaponType", (int)motionState);
 
         if (Input.GetKey(KeyCode.Mouse1))
-        {            
-            shootState = true;
+        {
+            ReadyState = true;
         }
         else if (Input.GetKeyUp(KeyCode.Mouse1))
         {
-            shootState = false;            
+            ReadyState = false;            
+        }
+        anim.SetBool("ShootReady", ReadyState);
+
+        if (Input.GetKey(KeyCode.Mouse0))
+        {
+            shootState = true;
+        }
+        else if (Input.GetKeyUp(KeyCode.Mouse0))
+        {
+            shootState = false;
         }
         anim.SetBool("Shoot", shootState);
+
+
+
     }
     public eMotionState GetMotion(eSkillState eSkill)
     {

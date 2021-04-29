@@ -27,7 +27,6 @@ public class RoomManager : MonoBehaviour
 
         if (loadData != null && RoomSample != null) {
             roomCount = loadData.RoomCount;
-            Debug.Log(loadData.RoomCount);
             RoomList = new GameObject[loadData.RoomCount];
 
             for (int i = 0; i < roomCount; i++) {
@@ -44,7 +43,6 @@ public class RoomManager : MonoBehaviour
         if (bridgeLoadData != null && RoomSample != null)
         {
             bridgeCount = bridgeLoadData.BridgeCount;
-            Debug.Log(bridgeLoadData.BridgeCount);
             BridgeList = new GameObject[bridgeLoadData.BridgeCount];
 
             for (int i = 0; i < bridgeCount; i++)

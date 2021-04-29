@@ -38,10 +38,8 @@ public class CameraRoll : MonoBehaviour
         mouseAbsolute += mouseSmooth;
 
         //clamp (범위 지정)
-       // if (clampInDegrees.x <= 360)
-       // {
-            mouseAbsolute.x = Mathf.Clamp(mouseAbsolute.x, -clampInDegrees.x * gab, clampInDegrees.x * gab);
-       // }
+        mouseAbsolute.x = Mathf.Clamp(mouseAbsolute.x, -clampInDegrees.x * gab, clampInDegrees.x * gab);
+
         if (clampInDegrees.y < 360)
         {
             mouseAbsolute.y = Mathf.Clamp(mouseAbsolute.y, -clampInDegrees.y * gab, clampInDegrees.y * gab);

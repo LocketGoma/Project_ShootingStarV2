@@ -162,7 +162,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void RevokePosition()
     {
-        Debug.Log(prevPosA - prevPosB);
+        //Debug.Log(prevPosA - prevPosB);
         transform.position = (prevPosA - (prevPosA-prevPosB)*2.5f);
     }
 

@@ -23,7 +23,6 @@ public class MovementCollision : MonoBehaviour
             playerParent.GetComponent<PlayerMovement>().SavePositionLately();            
         }
 
-        Debug.Log(other.gameObject.tag);
         if (other.gameObject.tag == "CounterMove")
         {
             playerParent.GetComponent<PlayerMovement>().RevokeCall();

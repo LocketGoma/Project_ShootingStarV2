@@ -8,8 +8,6 @@ public class DeadSpace : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.ToString());
-
         if (other.gameObject.tag != "Player" && other.gameObject.tag != "PlayerAvatar")
             Destroy(other.gameObject);
         else
