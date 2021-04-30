@@ -57,14 +57,14 @@ public class CrossHair : MonoBehaviour
         var checkRayHit = Physics.Raycast(ray, out hit, Reach);
         if (checkRayHit)
         {
-            //Debug.Log("Ray hit : "+hit.collider.tag);
-            if (hit.collider.tag != "Untagged")
+            //Debug.Log("Ray hit : "+hit.collider.tag);            
+            if (CounterColliderCheck(hit))
             {
                 normalCrosshairPrefab.GetComponent<Image>().color = new Color(1, 0, 0);
             }
 
         }
-        if (checkRayHit == false || hit.collider.tag == "Untagged")
+        if (checkRayHit == false || !CounterColliderCheck(hit))
         {
             normalCrosshairPrefab.GetComponent<Image>().color = new Color(1, 1, 1);
         }
@@ -76,7 +76,13 @@ public class CrossHair : MonoBehaviour
 
         targetVector = pCamera.transform.forward;
     }
+    private bool CounterColliderCheck(RaycastHit hit)
+    {
+        if (hit.collider.tag != "Player" && hit.collider.tag != "Untagged" && hit.collider.tag != "CounterMove" && hit.collider.tag != "DeadSpace")
+            return true;
 
+        return false;
+    }
 
     public Vector3 getTargetVector()
     {

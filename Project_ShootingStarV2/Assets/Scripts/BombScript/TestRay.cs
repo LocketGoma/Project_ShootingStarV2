@@ -69,12 +69,10 @@ public class TestRay : MonoBehaviour
         if (exploseParticle != null)
             exploseParticle.Play();
 
-        if (exploseParticle.isEmitting) Debug.Log("Emit");
-        if (exploseParticle.isPlaying) Debug.Log("Play");
-        if (exploseParticle.isPaused) Debug.Log("Pause");
-        if (exploseParticle.isStopped) Debug.Log("Stop");
-
-        
+        //if (exploseParticle.isEmitting) Debug.Log("Emit");
+        //if (exploseParticle.isPlaying) Debug.Log("Play");
+        //if (exploseParticle.isPaused) Debug.Log("Pause");
+        //if (exploseParticle.isStopped) Debug.Log("Stop");        
 
 
         GetComponent<MeshRenderer>().material.color = Color.red;

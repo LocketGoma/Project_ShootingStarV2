@@ -8,6 +8,9 @@ TagManager:
   - Item
   - PlayerAvatar
   - CounterMove
+  - Obstacle
+  - Enemy
+  - Boss
   layers:
   - Default
   - TransparentFX
