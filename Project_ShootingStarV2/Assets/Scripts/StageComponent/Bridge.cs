@@ -25,6 +25,8 @@ public class Bridge : MonoBehaviour
     public void Initialized(BridgeData bridgeInput)
     {
         BridgeNo = bridgeInput.BridgeNo;
+        NodeRoomANo = bridgeInput.NodeRoomANo;
+        NodeRoomBNo = bridgeInput.NodeRoomBNo;
         Axis_LX = bridgeInput.Axis_LX;
         Axis_LY = bridgeInput.Axis_LY;
         Axis_RX = bridgeInput.Axis_RX;
@@ -39,7 +41,8 @@ public class Bridge : MonoBehaviour
     public void InitBatch()
     {
         //gameObject.transform.position = new Vector3(Axis_LX, 0, Axis_LY);
-        gameObject.transform.position = new Vector3(Axis_LX + Mathf.Abs(Axis_LX - Axis_RX) / 2, 0.0f, Axis_LY + Mathf.Abs(Axis_LY - Axis_RY) / 2);
+      //  gameObject.transform.position = new Vector3(Axis_LX + Mathf.Abs(Axis_LX - Axis_RX) / 2, 0.0f, Axis_LY + Mathf.Abs(Axis_LY - Axis_RY) / 2);
+        gameObject.transform.position = new Vector3((Axis_LX +Axis_RX) / 2, 0.0f, (Axis_LY + Axis_RY) / 2);
         gameObject.transform.localScale = new Vector3(Axis_RX - Axis_LX, gameObject.transform.localScale.y, Axis_RY - Axis_LY);
 
     }

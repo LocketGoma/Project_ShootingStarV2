@@ -22,7 +22,7 @@ public class BSPRoomGenerator : MonoBehaviour
     [SerializeField] private int maxTry = 1024;
 
     private BinaryTree roomTree;
-
+    private bool phaseLock = false;                     //생성타이밍에 true 걸고 리턴시키는 역할
 
 
     void Start()
@@ -66,6 +66,11 @@ public class BSPRoomGenerator : MonoBehaviour
     //재귀임
     private bool GenerationRoomNode(int iDepth, BinaryTreeNode nowNode)
     {
+        if (phaseLock)
+        {
+            return phaseLock;
+        }
+
         if (iDepth >= maxTryExponential)
         {
             return true;
@@ -109,14 +114,14 @@ public class BSPRoomGenerator : MonoBehaviour
             rm1.Axis_RY = iSize;
             rm2.Axis_LY = iSize;
         }
-        DataPrint(rm1);
-        DataPrint(rm2);
+        //DataPrint(rm1);
+        //DataPrint(rm2);
 
         nowNode.Left = new BinaryTreeNode(rm1);
         nowNode.Right = new BinaryTreeNode(rm2);
 
         //최 하위 노드일때만 넣기
-        if (!GenerationRoomNode(iDepth+1, nowNode.Left))
+        if (!GenerationRoomNode(iDepth+1, nowNode.Left) && phaseLock == false)
         {
             RoomData data = nowNode.Data;
             data.RoomNo = RoomList.Count + 1;
@@ -127,9 +132,11 @@ public class BSPRoomGenerator : MonoBehaviour
 
             RoomList.Add(data);
 
+            phaseLock = true;
+
             return true;
         }
-         if(!GenerationRoomNode(iDepth + 1, nowNode.Right))
+         if(!GenerationRoomNode(iDepth + 1, nowNode.Right) && phaseLock == false)
         {
             RoomData data = nowNode.Data;
             data.RoomNo = RoomList.Count+1;
@@ -140,9 +147,11 @@ public class BSPRoomGenerator : MonoBehaviour
 
             RoomList.Add(data);
 
+            phaseLock = true;
             return true;
         }
 
+        phaseLock = false;
         return true;
     }
 

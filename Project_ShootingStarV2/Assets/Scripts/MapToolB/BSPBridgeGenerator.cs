@@ -30,91 +30,93 @@ public class BSPBridgeGenerator : MonoBehaviour
         //2. 가장 가까운 룸을 찾아서
         //3. 브릿지 연결
         int i = 0;
-        int j = 0;
         foreach (RoomData rm in roomListData)
         {
+            int j = 0;
             RoomData targetRoom = rm;
             float fRange = float.MaxValue;            
             foreach(RoomData tm in roomListData)
             {
-                if (i > j)
+                if (!(i >= j))
                 {
-                    continue;
+                    //Debug.Log("i : " + i + ", j :" + j);
+
+                    Vector3 Pos = new Vector3(rm.Axis_LX + (rm.Axis_RX - rm.Axis_LX) / 2, 0.0f, rm.Axis_LY + (rm.Axis_RY - rm.Axis_LY) / 2)
+                                - new Vector3(tm.Axis_LX + (tm.Axis_RX - tm.Axis_LX) / 2, 0.0f, tm.Axis_LY + (tm.Axis_RY - tm.Axis_LY) / 2);
+
+                    //Debug.Log("pos : " + Pos.magnitude + ", now Range : " + fRange);
+
+                    if (Pos.magnitude != 0 && Pos.magnitude < fRange)
+                    {
+                        //BSPRoomGenerator.DataPrint(tm);
+                        targetRoom = tm;
+                        fRange = Pos.magnitude;
+                    }
                 }
-
-                Vector3 Pos = new Vector3(rm.Axis_LX + (rm.Axis_RX - rm.Axis_LX) / 2, 0.0f, rm.Axis_LY + (rm.Axis_RY - rm.Axis_LY / 2)) - new Vector3(tm.Axis_LX + (tm.Axis_RX - tm.Axis_LX) / 2, 0.0f, tm.Axis_LY + (tm.Axis_RY - tm.Axis_LY / 2));
-
-                if (Pos.magnitude < fRange)
-                {
-                    targetRoom = tm;
-                    fRange = Pos.magnitude;
-                }
-                //Debug.Log(fRange);
-
                 j++;
             }
 
-            //if (targetRoom != rm)
-            //{
-                Debug.Log("BridgeMake");
 
-                BridgeData data = new BridgeData();
-            if (Mathf.Abs(rm.Axis_LX + (rm.Axis_RX - rm.Axis_LX) / 2 - targetRoom.Axis_LX + (targetRoom.Axis_RX - targetRoom.Axis_LX) / 2) > Mathf.Abs(rm.Axis_LY + (rm.Axis_RY - rm.Axis_LY) / 2 - targetRoom.Axis_LY + (targetRoom.Axis_RY - targetRoom.Axis_LY) / 2))
+            Debug.Log("BridgeMake");
+            BSPRoomGenerator.DataPrint(rm);
+            BSPRoomGenerator.DataPrint(targetRoom);
+
+            if (rm != targetRoom)
             {
-                //Hori
-                data.BridgeNo = BridgeList.Count + 1;
-                data.NodeRoomANo = rm.RoomNo;
-                data.NodeRoomBNo = rm.RoomNo;
-
-                //우측 > 좌측
-                if (rm.Axis_LX > targetRoom.Axis_LX)
+                BridgeData data = new BridgeData();
+                if (Mathf.Abs((rm.Axis_RX + rm.Axis_LX) / 2 - (targetRoom.Axis_RX + targetRoom.Axis_LX) / 2)
+                    > Mathf.Abs((rm.Axis_RY + rm.Axis_LY) / 2 - (targetRoom.Axis_RY + targetRoom.Axis_LY) / 2))
                 {
-                    data.Axis_RX = rm.Axis_LX;
-                    data.Axis_LX = data.Axis_RX - 3;
-                    // data.Axis_LX = targetRoom.Axis_RX;
+                    //Hori
+                    data.BridgeNo = BridgeList.Count + 1;
+                    data.NodeRoomANo = rm.RoomNo;
+                    data.NodeRoomBNo = targetRoom.RoomNo;
 
-                    Debug.Log(rm.Axis_LX + "," + targetRoom.Axis_RX);
+                    
+
+                    //우측 > 좌측
+                    if (rm.Axis_LX > targetRoom.Axis_LX)
+                    {
+                        //반대라고?
+                        data.Axis_RX = rm.Axis_LX;
+                        data.Axis_LX = targetRoom.Axis_RX;
+                    }
+                    else
+                    {
+                        data.Axis_LX = rm.Axis_RX;
+                        data.Axis_RX = targetRoom.Axis_LX;
+                    }
+                    data.Axis_LY = (((rm.Axis_RY + rm.Axis_LY) / 2)+((targetRoom.Axis_RY+targetRoom.Axis_LY)/2))/2;
+                    data.Axis_RY = data.Axis_LY + BridgeWidth;
                 }
                 else
                 {
-                    data.Axis_LX = rm.Axis_RX;
-                    data.Axis_RX = data.Axis_LX + 3;
-                    // data.Axis_RX = targetRoom.Axis_LX;
-                    Debug.Log(rm.Axis_RX + "," + targetRoom.Axis_LX);
+                    //Vert
+                    data.BridgeNo = BridgeList.Count + 1;
+                    data.NodeRoomANo = rm.RoomNo;
+                    data.NodeRoomBNo = targetRoom.RoomNo;
+                    //위측 > 아래측
+                    if (rm.Axis_LY > targetRoom.Axis_LY)
+                    {
+                        data.Axis_RY = rm.Axis_LY;                        
+                        data.Axis_LY = targetRoom.Axis_RY;                        
+                    }
+                    else
+                    {
+                        data.Axis_LY = rm.Axis_RY;                        
+                        data.Axis_RY = targetRoom.Axis_LY;
+                    }
+
+                    data.Axis_LX = (((rm.Axis_RX + rm.Axis_LX) / 2) + ((targetRoom.Axis_RX + targetRoom.Axis_LX) / 2)) / 2;
+                    data.Axis_RX = data.Axis_LX + BridgeWidth;
+
                 }
-                data.Axis_LY = rm.Axis_LY + (rm.Axis_RY - rm.Axis_LY) / 2;
-                data.Axis_RY = data.Axis_LY + BridgeWidth;
+                BridgeList.Add(data);
             }
             else
             {
-                //Hori
-                data.BridgeNo = BridgeList.Count + 1;
-                data.NodeRoomANo = rm.RoomNo;
-                data.NodeRoomBNo = rm.RoomNo;
-                //위측 > 아래측
-                if (rm.Axis_LY > targetRoom.Axis_LY)
-                {
-                    data.Axis_RY = rm.Axis_LX;
-                    data.Axis_LY = data.Axis_RY - 3;
-                    // data.Axis_LX = targetRoom.Axis_RX;
-
-                    Debug.Log(rm.Axis_LX + "," + targetRoom.Axis_RX);
-                }
-                else
-                {
-                    data.Axis_LY = rm.Axis_RY;
-                    data.Axis_RY = data.Axis_LY + 3;
-                    // data.Axis_RX = targetRoom.Axis_LX;
-                    Debug.Log(rm.Axis_RX + "," + targetRoom.Axis_LX);
-                }
-
-                data.Axis_LX = rm.Axis_LX + (rm.Axis_RX - rm.Axis_LX) / 2;
-                data.Axis_RX = data.Axis_LX + BridgeWidth;
-
+                Debug.LogError("rm tm is equal!");
             }
-                BridgeList.Add(data);
-          // }
-
             i++;
         }
         

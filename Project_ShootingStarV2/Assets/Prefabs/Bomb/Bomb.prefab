@@ -123,7 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   raySticks: 100
   searchReach: 0.5
-  explosePower: 1500
+  explosePower: 2500
   exploseSize: 5
   exploseParticle: {fileID: 6482222446202780188, guid: 343bbfc27afec644e9e818761e804fc7,
     type: 3}
