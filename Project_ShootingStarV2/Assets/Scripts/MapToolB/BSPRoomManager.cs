@@ -5,14 +5,19 @@ using UnityEngine.UI;
 
 public class BSPRoomManager : MonoBehaviour
 {
-    [SerializeField] private LoadData loadData;
+    [Header("Sample, Make List")]
     [SerializeField] private GameObject[] RoomList;     //Room List
     [SerializeField] private GameObject[] BridgeList;     //Bridge List
     [SerializeField] private GameObject RoomSample;     //Room Sample Prefab
     [SerializeField] private GameObject BridgeSample;     //Bridge Sample Prefab
+
+    [Header("Count")]
     [SerializeField] private int roomCount;
     [SerializeField] private int bridgeCount;
+
+    [Header("Generator Machine")]
     [SerializeField] private JsonParser jsonParser;
+    [SerializeField] private LoadData loadData;
     [SerializeField] private BSPRoomGenerator roomGenerator;
     [SerializeField] private BSPBridgeGenerator bridgeGenerator;
 

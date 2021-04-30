@@ -10,6 +10,7 @@ public class Room : MonoBehaviour
     [SerializeField] protected int Axis_RX;
     [SerializeField] protected int Axis_RY;
 
+    public int RoomNumber { get { return RoomNo; } }
 
     // Start is called before the first frame update
     void Start()

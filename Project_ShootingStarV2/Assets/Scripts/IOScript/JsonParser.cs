@@ -58,7 +58,7 @@ public class JsonParser : MonoBehaviour
         }
         parseData += "  \n]\n}";
 
-        FileStream fileStream = new FileStream("./TestResult.json", FileMode.OpenOrCreate, FileAccess.Write);
+        FileStream fileStream = new FileStream("./TestResult.json", FileMode.Create, FileAccess.Write);
         StreamWriter writer = new StreamWriter(fileStream, System.Text.Encoding.Unicode);
 
         writer.WriteLine(parseData);
@@ -81,7 +81,7 @@ public class JsonParser : MonoBehaviour
         }
         parseData += "  \n]\n}";
 
-        FileStream fileStream = new FileStream("./TestBridgeResult.json", FileMode.OpenOrCreate, FileAccess.Write);
+        FileStream fileStream = new FileStream("./TestBridgeResult.json", FileMode.Create, FileAccess.Write);
         StreamWriter writer = new StreamWriter(fileStream, System.Text.Encoding.Unicode);
 
         writer.WriteLine(parseData);

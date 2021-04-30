@@ -6,6 +6,11 @@ public class MovementCollision : MonoBehaviour
 {
     public GameObject playerParent;
 
+    private void Update()
+    {
+        transform.localPosition = new Vector3(0.02f, transform.localPosition.y, -0.1f);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "DeadSpace")
