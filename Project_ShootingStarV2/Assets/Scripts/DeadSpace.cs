@@ -13,7 +13,9 @@ public class DeadSpace : MonoBehaviour
         else
         {
             if (other.gameObject.GetComponent<PlayerMovement>() != null)
+            {
                 other.gameObject.GetComponent<PlayerMovement>().RevokePosition();
+            }
             
             deadCount++;
 

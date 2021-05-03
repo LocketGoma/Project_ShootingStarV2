@@ -12,6 +12,7 @@ public class PlayerStatus : MonoBehaviour
     [SerializeField] private int fullMP = 200;
     [SerializeField] private float nowHP;
     [SerializeField] private float nowMP;
+    
 
 
     public int FullHP { get { return fullHP; } }
@@ -21,8 +22,8 @@ public class PlayerStatus : MonoBehaviour
 
    // public void HurtHP (int iDamage) { nowHP -= iDamage; if (iDamage < 0) nowHP = 0; }
     
-    public void RestoreHP (int iRestore) { nowHP += iRestore; if (nowHP > FullHP) nowHP = fullHP; }
-    public void RestoreMP (int iRestore) { nowMP += iRestore; if (nowMP > FullMP) nowMP = fullMP; }
+    public bool RestoreHP (int iRestore) { if (nowHP >= FullHP) return false; nowHP += iRestore; if (nowHP > FullHP) nowHP = fullHP; return true; }
+    public bool RestoreMP (int iRestore) { if (nowMP >= FullMP) return false; nowMP += iRestore; if (nowMP > FullMP) nowMP = fullMP; return true; }
 
     [Header("Restore Cooltime")]
     //HP 회복 진입 필요시간 / 전체 회복에 걸리는 시간
@@ -45,6 +46,7 @@ public class PlayerStatus : MonoBehaviour
     private bool MPWarning;
     private float HPWarningTime;
     private float MPWarningTime;
+    private float HPWarningPercent;
 
     private void Awake()
     {
@@ -56,8 +58,11 @@ public class PlayerStatus : MonoBehaviour
         //mpRestoreTime = 100.0f;
 
 
-        nowHP = fullHP;
+        nowHP = 1;
         nowMP = fullMP;
+        HPWarning = true;
+
+        HPWarningPercent = 0.2f;
     }
 
     // Start is called before the first frame update
@@ -69,15 +74,27 @@ public class PlayerStatus : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (nowHP < fullHP)
+        {
+            nowHP += Time.deltaTime * fullHP * (1 / hpRestoreTime);
+        }
         if (nowMP < fullMP)
         {
             nowMP += Time.deltaTime * fullMP * (1 / mpRestoreTime);
         }
 
+
         HPBar.transform.localScale = new Vector3((nowHP / fullHP),1,1);
         MPBar.transform.localScale = new Vector3((nowMP / fullMP),1,1);
         HPText.text = (int)nowHP + "/" + fullHP;
         MPText.text = (int)nowMP + "/" + fullMP;
+
+        if (HPWarning)
+        {
+            StartCoroutine("WarningHPSign");
+            HPWarning = false;
+        }
 
         if (MPWarning)
         {
@@ -88,9 +105,10 @@ public class PlayerStatus : MonoBehaviour
 
     public void HurtHP(int iDamage)
     {
+        Debug.Log(iDamage);
         if (useMagicShield)
         {
-            if (nowMP * 2 > iDamage)
+            if (nowMP > iDamage * 2)
             {
                 nowMP -= (iDamage * 2);
                 return;
@@ -102,6 +120,11 @@ public class PlayerStatus : MonoBehaviour
             }
         }
         nowHP -= iDamage;
+
+        if (nowHP < 0)
+        {
+            nowHP = 0;                
+        }
     }
 
     public bool UseMP(int iCost) 
@@ -119,15 +142,31 @@ public class PlayerStatus : MonoBehaviour
         return !MPWarning;
     }
 
+    IEnumerator WarningHPSign()
+    {
+        while (true)
+        {
+            HPText.color = new Color(1, 1 - ((Mathf.Sin(HPWarningTime) + 1) / 2), 1 - ((Mathf.Sin(HPWarningTime) + 1) / 2));
+            HPWarningTime += Time.deltaTime * 5.0f;
 
+            if (nowHP/fullHP > HPWarningPercent)
+            {
+                StopCoroutine("WarningHPSign");
+
+                HPText.color = new Color(1, 1, 1);
+                HPWarningTime = 0.0f;
+
+                yield return null;
+            }
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+    }
     IEnumerator WarningMPSign()
     {
         while (true)
         {
             MPText.color = new Color(1, 1 - ((Mathf.Sin(MPWarningTime) + 1) / 2), 1 - ((Mathf.Sin(MPWarningTime) + 1) / 2));
             MPWarningTime += Time.deltaTime*5.0f;
-
-            Debug.Log(MPWarningTime + "vs" + Mathf.Deg2Rad * 90.0f + "=" + (Mathf.Sin(MPWarningTime) + 1) / 2);
 
             if (MPWarningTime > Mathf.Deg2Rad * 720.0f)
             {
@@ -138,7 +177,6 @@ public class PlayerStatus : MonoBehaviour
 
                 yield return null;
             }
-
             yield return new WaitForSeconds(Time.deltaTime);
         }
     }
