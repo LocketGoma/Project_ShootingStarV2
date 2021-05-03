@@ -19,7 +19,7 @@ public class RoomState : MonoBehaviour
     [SerializeField] private GameObject [] battleWall ; //닫겼다가 열렸다가 하는 벽들
 
     [Header("Obstacle")]
-    [SerializeField] private GameObject [] obstacleObject ; //닫겼다가 열렸다가 하는 벽들
+    [SerializeField] private GameObject [] obstacleObject ; //장애물들
 
 
 
@@ -27,7 +27,7 @@ public class RoomState : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (gameObject.GetComponent<Room>().RoomNumber != 0)
+        if (gameObject.transform.parent.GetComponent<Room>().RoomNumber != 0)
         {
             nowMapType = (eMapType)Random.Range(0, 6);
         }
@@ -58,6 +58,8 @@ public class RoomState : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //Debug.Log("StageTag:"+other.gameObject.tag);
+
         if (nowMapType == eMapType.SafeZone || isClear == true)
         {
             return;
@@ -95,8 +97,6 @@ public class RoomState : MonoBehaviour
         {
             obj.SetActive(state);
         }
-
-
     }
 
 }

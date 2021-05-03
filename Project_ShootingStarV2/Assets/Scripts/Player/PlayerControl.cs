@@ -63,7 +63,8 @@ public class PlayerControl : MonoBehaviour
 
     void ShootBullet()
     {
-        if (bullet != null)
+        if (bullet != null && gameObject.GetComponent<PlayerStatus>().UseMP(15) == true)
+        //if (bullet != null)
         {
             Debug.Log("shoot");
             Instantiate(bullet, transform.GetChild(1).transform.position, transform.rotation).GetComponent<Rigidbody>().AddForce(transform.GetComponentInChildren<CrossHair>().getTargetVector() * power*bullet.GetComponent<Rigidbody>().mass, ForceMode.Impulse);

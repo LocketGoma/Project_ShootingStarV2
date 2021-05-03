@@ -10,6 +10,8 @@ public class Room : MonoBehaviour
     [SerializeField] protected int Axis_RX;
     [SerializeField] protected int Axis_RY;
 
+    [SerializeField] private GameObject targetRoomObject;
+
     public int RoomNumber { get { return RoomNo; } }
 
     // Start is called before the first frame update
@@ -38,7 +40,8 @@ public class Room : MonoBehaviour
     {
         //gameObject.transform.position = new Vector3(Axis_LX, 0, Axis_LY);
         gameObject.transform.position = new Vector3(Axis_LX + Mathf.Abs(Axis_LX-Axis_RX)/2,0.0f, Axis_LY+ Mathf.Abs(Axis_LY - Axis_RY)/2);
-        gameObject.transform.localScale = new Vector3(Axis_RX - Axis_LX, 1, Axis_RY - Axis_LY);
+        //gameObject.transform.localScale = new Vector3(Axis_RX - Axis_LX, 1, Axis_RY - Axis_LY);
+        targetRoomObject.transform.localScale = new Vector3(Axis_RX - Axis_LX, 1, Axis_RY - Axis_LY);
 
     }
 }
