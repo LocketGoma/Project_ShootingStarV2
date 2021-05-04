@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+//https://docs.unity3d.com/kr/530/Manual/InverseKinematics.html
 public class PlayerShooterController : MonoBehaviour
 {
     //모션 종류. 기본 / 권총 / 라이플 / 던지기
     public enum eMotionState
     {
-        Idle,Handgun,Rifle,Throwable,END
+        Idle,Handgun,Rifle,Throwable
     };
 
     //스킬 종류 : 기본 / 권총 / 손가락 총 (스킬1) / 라이플 / 정밀사격 / 투척 / 스킬 2
@@ -31,6 +32,9 @@ public class PlayerShooterController : MonoBehaviour
     [Range(0, 250.0f)]
     [SerializeField] private float weaponAmmoSpeed;
     [SerializeField] private float toTargetRange;
+    [Tooltip("60/N : 1min / AmmoCrate")]
+    [SerializeField] private float [] weaponROF;
+    private float weaponCooltime = float.MaxValue;
     private Vector3 ammoDir;
 
 
@@ -50,6 +54,12 @@ public class PlayerShooterController : MonoBehaviour
         WheelState();
         motionState = GetMotion(skillState);
 
+        if (motionState != eMotionState.Throwable)
+        {
+            GetComponent<PlayerStatus>().SetAmmoUseCount((int)motionState);
+        }
+
+
         anim.SetInteger("WeaponType", (int)motionState);
 
         if (Input.GetKey(KeyCode.Mouse1))
@@ -66,14 +76,21 @@ public class PlayerShooterController : MonoBehaviour
         {
             if (motionState == eMotionState.Handgun || motionState == eMotionState.Rifle)
             {
-                AmmoDirectionCaculator();
+                if (weaponCooltime > weaponROF[(int)motionState-1])
+                {
+                    AmmoDirectionCaculator();
+                    weaponCooltime = 0.0f;
+                }
             }
             shootState = true;
         }
         else if (Input.GetKeyUp(KeyCode.Mouse0))
         {
+            weaponCooltime = float.MaxValue;
             shootState = false;
         }
+        weaponCooltime += Time.deltaTime;
+
         anim.SetBool("Shoot", shootState);
     }
     public eMotionState GetMotion(eSkillState eSkill)
@@ -155,6 +172,9 @@ public class PlayerShooterController : MonoBehaviour
 
     private void AmmoDirectionCaculator()
     {
+        if (!GetComponent<PlayerStatus>().ShootAmmo((int)motionState))
+            return;
+
         Ray ray = targetCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
         RaycastHit hit;
 
@@ -174,6 +194,7 @@ public class PlayerShooterController : MonoBehaviour
             ammoDir = ray.direction * toTargetRange;// - handPosition.transform.position;
             Instantiate(weaponAmmo, handPosition.transform.position, transform.rotation).GetComponent<Rigidbody>().AddForce(ammoDir.normalized * weaponAmmoSpeed, ForceMode.Impulse);
         }
+
 
     }
         

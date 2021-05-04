@@ -795,6 +795,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1109708898913608983, guid: 311c14fc2f47af449924ddf33df880cb,
         type: 3}
+      propertyPath: weaponROF.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1109708898913608983, guid: 311c14fc2f47af449924ddf33df880cb,
+        type: 3}
       propertyPath: text
       value: 
       objectReference: {fileID: 1381737351}
@@ -806,12 +811,22 @@ PrefabInstance:
     - target: {fileID: 1109708898913608983, guid: 311c14fc2f47af449924ddf33df880cb,
         type: 3}
       propertyPath: weaponAmmoSpeed
-      value: 35
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 1109708898913608983, guid: 311c14fc2f47af449924ddf33df880cb,
         type: 3}
       propertyPath: weaponMaxRange
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 1109708898913608983, guid: 311c14fc2f47af449924ddf33df880cb,
+        type: 3}
+      propertyPath: weaponROF.Array.data[0]
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1109708898913608983, guid: 311c14fc2f47af449924ddf33df880cb,
+        type: 3}
+      propertyPath: weaponROF.Array.data[1]
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 1109708899137287901, guid: 311c14fc2f47af449924ddf33df880cb,
         type: 3}

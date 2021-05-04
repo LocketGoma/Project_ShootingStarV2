@@ -103,7 +103,16 @@ public class PlayerStatus : MonoBehaviour
         MPText.text = (int)nowMP + "/" + fullMP;
 
         nowAmmoText.text = nowAmmo.ToString();
-        useCountAmmoText.text = "(" + useCountAmmo + ")";
+        if (useCountAmmo != 0)
+        {
+            useCountAmmoText.text = "(" + useCountAmmo + ")";
+            useCountAmmoText.enabled = true;
+        }
+        else
+        {
+            useCountAmmoText.text = "";
+            useCountAmmoText.enabled = false;
+        }
         maxAmmoText.text = "/"+ maxAmmo.ToString();        
 
 
@@ -133,6 +142,12 @@ public class PlayerStatus : MonoBehaviour
             return false;
         }
     }
+
+    public void SetAmmoUseCount(int ammoCrate)
+    {
+        useCountAmmo = ammoCrate;
+    }
+
     public bool RestoreAmmo(int ammoCrate)
     {
         if (nowAmmo >= maxAmmo)
