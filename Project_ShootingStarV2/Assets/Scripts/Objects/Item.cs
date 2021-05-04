@@ -61,6 +61,19 @@ public class Item : MonoBehaviour
                     Destroy(gameObject);
                 }
             }
+
+            if (itemType == ItemType.Ammo)
+            {
+                if (other.gameObject.transform.parent.GetComponent<PlayerStatus>().RestoreAmmo(itemAmount))
+                {
+                    Instantiate(exploseParticle, transform.position, transform.rotation);
+
+                    if (exploseParticle != null)
+                        exploseParticle.Play();
+
+                    Destroy(gameObject);
+                }
+            }
         }
 
     }

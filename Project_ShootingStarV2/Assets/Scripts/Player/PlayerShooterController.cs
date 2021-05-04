@@ -21,11 +21,27 @@ public class PlayerShooterController : MonoBehaviour
     [SerializeField] private Animator anim;
     [SerializeField] private Text text;
 
+    [Header("Weapon")]
+    [SerializeField] private GameObject handPosition;
+    [SerializeField] private GameObject weaponHandGun;
+    [SerializeField] private GameObject weaponRifle;
+    [SerializeField] private GameObject weaponAmmo;
+    [Range(0,250.0f)]
+    [SerializeField] private float weaponMaxRange;
+    [Range(0, 250.0f)]
+    [SerializeField] private float weaponAmmoSpeed;
+    [SerializeField] private float toTargetRange;
+    private Vector3 ammoDir;
+
+
+    [Header("TargetLook")]
+    [SerializeField] private Camera targetCamera;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        weaponHandGun.SetActive(false);
+        weaponRifle.SetActive(false);
     }
 
     // Update is called once per frame
@@ -48,6 +64,10 @@ public class PlayerShooterController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Mouse0))
         {
+            if (motionState == eMotionState.Handgun || motionState == eMotionState.Rifle)
+            {
+                AmmoDirectionCaculator();
+            }
             shootState = true;
         }
         else if (Input.GetKeyUp(KeyCode.Mouse0))
@@ -55,9 +75,6 @@ public class PlayerShooterController : MonoBehaviour
             shootState = false;
         }
         anim.SetBool("Shoot", shootState);
-
-
-
     }
     public eMotionState GetMotion(eSkillState eSkill)
     {
@@ -65,31 +82,40 @@ public class PlayerShooterController : MonoBehaviour
         {
         case eSkillState.Idle:
             {
+                weaponHandGun.SetActive(false);
                 text.text = "";
                 return eMotionState.Idle;
             }
         case eSkillState.Handgun:
             {
+                weaponHandGun.SetActive(true);
                 text.text = "HandGun";
                 return eMotionState.Handgun;
             }
         case eSkillState.HandShootSkill:
             {
+                weaponHandGun.SetActive(true);
+                weaponRifle.SetActive(false);
+
                 text.text = "HandSkill";
                 return eMotionState.Handgun;
             }
         case eSkillState.Rifle:
             {
+                weaponHandGun.SetActive(false);
+                weaponRifle.SetActive(true);
                 text.text = "Rifle";
                 return eMotionState.Rifle;
             }
         case eSkillState.Precision:
             {
+                weaponRifle.SetActive(true);
                 text.text = "Precision";
                 return eMotionState.Rifle;
             }
         case eSkillState.Throw:
             {
+                weaponRifle.SetActive(false);
                 text.text = "Throw";
                 return eMotionState.Throwable;
             }
@@ -127,4 +153,36 @@ public class PlayerShooterController : MonoBehaviour
         }
     }
 
+    private void AmmoDirectionCaculator()
+    {
+        Ray ray = targetCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+        RaycastHit hit;
+
+        bool checkRayHit = Physics.Raycast(ray, out hit, weaponMaxRange);
+        if (checkRayHit && CounterColliderCheck(hit))
+        {
+
+            toTargetRange = (hit.point - gameObject.transform.position).magnitude;
+            ammoDir = hit.point - handPosition.transform.position;
+            ;
+            Instantiate(weaponAmmo, handPosition.transform.position, transform.rotation).GetComponent<Rigidbody>().AddForce(ammoDir.normalized * weaponAmmoSpeed, ForceMode.Impulse);
+
+        }
+        else
+        {
+            toTargetRange = weaponMaxRange;
+            ammoDir = ray.direction * toTargetRange;// - handPosition.transform.position;
+            Instantiate(weaponAmmo, handPosition.transform.position, transform.rotation).GetComponent<Rigidbody>().AddForce(ammoDir.normalized * weaponAmmoSpeed, ForceMode.Impulse);
+        }
+
+    }
+        
+
+    private bool CounterColliderCheck(RaycastHit hit)
+    {
+        if (hit.collider.tag != "Player" && hit.collider.tag != "PlayerAvatar" && hit.collider.tag != "DeadSpace")
+            return true;
+
+        return false;
+    }
 }

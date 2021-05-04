@@ -48,6 +48,18 @@ public class PlayerStatus : MonoBehaviour
     private float MPWarningTime;
     private float HPWarningPercent;
 
+
+    [Header("Ammo")]
+    [SerializeField] private int maxAmmo;
+    [SerializeField] private int nowAmmo;
+                    public int useCountAmmo = 1;            //한번에 소비되는 탄약 수
+
+
+    [Header("Ammo Visual")]
+    [SerializeField] private Text nowAmmoText;
+    [SerializeField] private Text maxAmmoText;
+    [SerializeField] private Text useCountAmmoText;
+
     private void Awake()
     {
         //fullHP = 200;
@@ -68,7 +80,7 @@ public class PlayerStatus : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        maxAmmoText.text = maxAmmo.ToString();
     }
 
     // Update is called once per frame
@@ -90,6 +102,11 @@ public class PlayerStatus : MonoBehaviour
         HPText.text = (int)nowHP + "/" + fullHP;
         MPText.text = (int)nowMP + "/" + fullMP;
 
+        nowAmmoText.text = nowAmmo.ToString();
+        useCountAmmoText.text = "(" + useCountAmmo + ")";
+        maxAmmoText.text = "/"+ maxAmmo.ToString();        
+
+
         if (HPWarning)
         {
             StartCoroutine("WarningHPSign");
@@ -101,6 +118,32 @@ public class PlayerStatus : MonoBehaviour
             StartCoroutine("WarningMPSign");
             MPWarning = false;
         }
+    }
+
+    public bool ShootAmmo(int ammoCrate)
+    {
+        useCountAmmo=ammoCrate;
+        if (nowAmmo >= useCountAmmo)
+        {
+            nowAmmo -= useCountAmmo;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    public bool RestoreAmmo(int ammoCrate)
+    {
+        if (nowAmmo >= maxAmmo)
+            return false;
+
+        nowAmmo += ammoCrate;
+
+        if (nowAmmo > maxAmmo)
+            nowAmmo = maxAmmo;
+
+        return true;
     }
 
     public void HurtHP(int iDamage)

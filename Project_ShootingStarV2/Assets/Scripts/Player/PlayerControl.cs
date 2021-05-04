@@ -32,7 +32,7 @@ public class PlayerControl : MonoBehaviour
     void Update()
     {
         //Debug.Log((maxPower / powerChargeTime) * (Time.deltaTime));
-        if (Input.GetMouseButton(0))
+        if (Input.GetKey(KeyCode.G))
         {
             power += (Mathf.Log(Mathf.Pow(power, 5), powerChargeTime) * Time.deltaTime);     //속도 올라가는걸 지수함수 말고 로그함수로 해야할거같은데.
             if (power > maxPower || autoCharge)
@@ -49,7 +49,7 @@ public class PlayerControl : MonoBehaviour
         {
             autoCharge = false;
         }
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetKeyUp(KeyCode.G))
         {
             ShootBullet();
             power = minPower;
