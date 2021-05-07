@@ -78,7 +78,15 @@ public class PlayerShooterController : MonoBehaviour
             {
                 if (weaponCooltime > weaponROF[(int)motionState-1])
                 {
-                    AmmoDirectionCaculator();
+                    if (AmmoDirectionCaculator())
+                    {
+                        if (motionState == eMotionState.Handgun)
+                            weaponHandGun.GetComponent<WeaponEffect>().EffectPlay();
+
+                        if (motionState == eMotionState.Rifle)
+                            weaponRifle.GetComponent<WeaponEffect>().EffectPlay();
+
+                    }
                     weaponCooltime = 0.0f;
                 }
             }
@@ -170,10 +178,10 @@ public class PlayerShooterController : MonoBehaviour
         }
     }
 
-    private void AmmoDirectionCaculator()
+    private bool AmmoDirectionCaculator()
     {
         if (!GetComponent<PlayerStatus>().ShootAmmo((int)motionState))
-            return;
+            return false;
 
         Ray ray = targetCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
         RaycastHit hit;
@@ -196,6 +204,7 @@ public class PlayerShooterController : MonoBehaviour
         }
 
 
+        return true;
     }
         
 

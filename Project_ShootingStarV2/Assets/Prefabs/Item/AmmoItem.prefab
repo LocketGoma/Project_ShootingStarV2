@@ -42,7 +42,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: 1
-  itemAmount: 10
+  itemAmount: 30
   rotateSpeed: 1.5
   exploseParticle: {fileID: 6482222446202780188, guid: 9d27e268252d48740b28c457b422ee80,
     type: 3}

@@ -6,6 +6,7 @@ public class BasicAmmo : MonoBehaviour
 {
     [Range(0.5f, 5.0f)]
     [SerializeField] private float ammoLifeTime;
+    public ParticleSystem exploseParticle;
     private float nowTime;
 
 
@@ -25,6 +26,14 @@ public class BasicAmmo : MonoBehaviour
     {
         //대미지 주고
 
+        //이펙트 실행하고
+        if (exploseParticle != null)
+        {
+            Instantiate(exploseParticle, transform.position, transform.rotation);
+            exploseParticle.Play();
+        }
+
+        //삭제
         Destroy(gameObject);
     }
 

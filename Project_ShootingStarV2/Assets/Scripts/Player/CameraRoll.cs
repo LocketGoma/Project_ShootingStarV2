@@ -30,8 +30,6 @@ public class CameraRoll : MonoBehaviour
         //new Vector2(prevMousePos.x-mouseDelta.x,mouseDelta.y)
         mouseDelta = Vector2.Scale(mouseDelta, new Vector2(sensitivity.x * Smoothing.x, sensitivity.y * Smoothing.y));
         
-
-
         //보간 삽입
         mouseSmooth.x = Mathf.Lerp(mouseSmooth.x, mouseDelta.x, 1f / Smoothing.x);
         mouseSmooth.y = Mathf.Lerp(mouseSmooth.y, mouseDelta.y, 1f / Smoothing.y);
@@ -39,11 +37,12 @@ public class CameraRoll : MonoBehaviour
 
         //clamp (범위 지정)
         mouseAbsolute.x = Mathf.Clamp(mouseAbsolute.x, -clampInDegrees.x * gab, clampInDegrees.x * gab);
+        mouseAbsolute.y = Mathf.Clamp(mouseAbsolute.y, -clampInDegrees.y * gab, clampInDegrees.y * gab);
 
-        if (clampInDegrees.y < 360)
+        if (mouseAbsolute.y < -70.0f)
         {
-            mouseAbsolute.y = Mathf.Clamp(mouseAbsolute.y, -clampInDegrees.y * gab, clampInDegrees.y * gab);
-        }       
+            mouseAbsolute.y = -70.0f;
+        }
 
         transform.localRotation = Quaternion.AngleAxis(-mouseAbsolute.y, targetOrientation * Vector3.right); //여기는 최종 절대값으로 (시작지점)
 
