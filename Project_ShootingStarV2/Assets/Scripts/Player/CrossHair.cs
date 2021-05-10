@@ -60,7 +60,10 @@ public class CrossHair : MonoBehaviour
             //Debug.Log("Ray hit : "+hit.collider.tag);            
             if (CounterColliderCheck(hit))
             {
-                normalCrosshairPrefab.GetComponent<Image>().color = new Color(1, 0, 0);
+                if (hit.collider.tag == "Item")
+                    normalCrosshairPrefab.GetComponent<Image>().color = new Color(0.2f, 0.2f, 1);
+                else
+                    normalCrosshairPrefab.GetComponent<Image>().color = new Color(1, 0, 0);
             }
 
         }

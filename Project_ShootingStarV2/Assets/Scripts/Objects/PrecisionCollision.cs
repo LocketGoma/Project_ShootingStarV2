@@ -7,6 +7,9 @@ public class PrecisionCollision : MonoBehaviour
     private GameObject forceTarget = null;
     [Range(0.001f, 1.0f)]
     public float ReachGab;
+
+    [Range(0,100)]
+    public int iDamage;
     
 
     // Update is called once per frame
@@ -21,12 +24,17 @@ public class PrecisionCollision : MonoBehaviour
         {
             if (CounterColliderCheck(hit) && (forceTarget == null || forceTarget != hit.collider.gameObject))
             {
-                Debug.Log("Collision Hit!");
+                //Debug.Log("Collision Hit!");
                 forceTarget = hit.collider.gameObject;
                 forceTarget.GetComponent<Rigidbody>().AddForce(gameObject.GetComponent<Rigidbody>().velocity,ForceMode.Impulse);
 
-                //이펙트 처리
 
+                if (hit.collider.tag == "Enemy")
+                {
+                    hit.collider.gameObject.GetComponent<EnemyStatus>().HurtHP(iDamage);
+                }
+
+                //이펙트 처리
                 Instantiate(GetComponent<BasicAmmo>().exploseParticle, hit.collider.transform.position, transform.rotation);
                 GetComponent<BasicAmmo>().exploseParticle.Play();
 
@@ -37,7 +45,7 @@ public class PrecisionCollision : MonoBehaviour
 
     private bool CounterColliderCheck(RaycastHit hit)
     {
-        if (hit.collider.tag != "Player" && hit.collider.tag != "Untagged" && hit.collider.tag != "CounterMove" && hit.collider.tag != "DeadSpace")
+        if (hit.collider.tag != "Player" && hit.collider.tag != "Untagged" && hit.collider.tag != "CounterMove" && hit.collider.tag != "DeadSpace" && hit.collider.tag != "Item")
             return true;
 
         return false;

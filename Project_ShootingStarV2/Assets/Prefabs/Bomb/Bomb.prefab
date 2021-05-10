@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6377740850225336654}
   - component: {fileID: 6377740850225336693}
   m_Layer: 12
-  m_Name: Bullet
+  m_Name: Bomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -127,3 +127,4 @@ MonoBehaviour:
   exploseSize: 5
   exploseParticle: {fileID: 6482222446202780188, guid: 343bbfc27afec644e9e818761e804fc7,
     type: 3}
+  exploseDamage: 10

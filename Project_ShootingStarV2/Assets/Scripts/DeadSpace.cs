@@ -9,14 +9,16 @@ public class DeadSpace : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag != "Player" && other.gameObject.tag != "PlayerAvatar")
+        {
             Destroy(other.gameObject);
+        }
         else
         {
             if (other.gameObject.GetComponent<PlayerMovement>() != null)
             {
                 other.gameObject.GetComponent<PlayerMovement>().RevokePosition();
             }
-            
+
             deadCount++;
 
             if (deadCount > 5)
@@ -24,9 +26,15 @@ public class DeadSpace : MonoBehaviour
                 other.gameObject.transform.position = Vector3.zero;
                 deadCount = 0;
             }
-        }
-
-        
+        }        
     }
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag != "Player" && other.gameObject.tag != "PlayerAvatar")
+        {
+            Destroy(other.gameObject);
+        }
+    }
+
 
 }

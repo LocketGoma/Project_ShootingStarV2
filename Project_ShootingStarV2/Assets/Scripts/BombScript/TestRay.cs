@@ -13,6 +13,9 @@ public class TestRay : MonoBehaviour
     public float exploseSize = 5f;
     public ParticleSystem exploseParticle;
 
+    [Range(0, 100)]
+    public int exploseDamage;
+
     Vector3[] vt;
     Ray[] ry;
     // Start is called before the first frame update
@@ -84,6 +87,11 @@ public class TestRay : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ry[i], out hit, exploseSize) && hit.collider.GetComponent<Rigidbody>()!= null) {                                
                 hit.collider.GetComponent<Rigidbody>().AddForce(ry[i].direction * explosePower);
+
+                if (hit.collider.tag == "Enemy")
+                {
+                    hit.collider.gameObject.GetComponent<EnemyStatus>().HurtHP(exploseDamage);
+                }
             }
         }
         Destroy(gameObject);

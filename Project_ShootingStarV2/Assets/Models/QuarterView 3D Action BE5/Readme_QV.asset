@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90aeab3e5f29bee4c859e1bbcbcae785, type: 3}
+  m_Name: Readme_QV
+  m_EditorClassIdentifier: 
+  icon: {fileID: 2800000, guid: 14c4b9c6e45f89548a3cfcc514ca788e, type: 3}
+  title: QuarterView 3D Action
+  sections:
+  - heading: "\uCFFC\uD130\uBDF0 \uC561\uC158(Quarter Vi"
+    text: "\uCFFC\uD130\uBDF0 \uC2DC\uC810\uC73C\uB85C \uB2E4\uC591\uD55C \uC561\uC158\uC744
+      \uD3BC\uCE58\uBA70 \uC801\uB4E4\uC744 \uBB3C\uB9AC\uCE58\uACE0 \uBCF4\uC2A4\uC640
+      \uC2F8\uC6B0\uB294 \uC7A5\uB974\uC785\uB2C8\uB2E4."
+    linkText: 
+    url: 
+  - heading: 
+    text: "\uACE8\uB4DC\uBA54\uD0C8 \uAE30\uCD08 \uAC15\uC88C BE5 \uC9C4\uD589\uC5D0
+      \uD544\uC694\uD55C \uC5D0\uC14B \uD329\uC73C\uB85C \uC560\uB2C8\uBA54\uC774\uC158\uC774
+      \uCCA8\uBD80\uB41C 3D\uBAA8\uB378\uACFC \uD30C\uD2F0\uD074\uC744 \uD3EC\uD568\uD558\uACE0
+      \uC788\uC2B5\uB2C8\uB2E4."
+    linkText: "BE5 \uAC15\uC88C"
+    url: https://www.youtube.com/playlist?list=PLO-mt5Iu5TeYkrBzWKuTCl6IUm_bA6BKy
+  - heading: 
+    text: "\uACE8\uB4DC\uBA54\uD0C8 \uCD9C\uC800\uB9CC \uD45C\uAE30\uD558\uB294 \uC804\uC81C
+      \uD558\uC5D0 \uC790\uC720\uB86D\uAC8C \uC0AC\uC6A9 \uAC00\uB2A5\uD569\uB2C8\uB2E4.
+      (\uC0C1\uC6A9 \uAC00\uB2A5)"
+    linkText: "\uACE8\uB4DC\uBA54"
+    url: https://www.goldmetal.co.kr
+  - heading: 
+    text: "Copyright \u24D2 2021 Goldmetal"
+    linkText: 
+    url: 
+  loadedLayout: 1

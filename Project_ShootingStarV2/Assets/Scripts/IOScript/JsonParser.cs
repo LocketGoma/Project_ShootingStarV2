@@ -37,7 +37,7 @@ public class JsonParser : MonoBehaviour
         {
             Debug.LogError("Json - Bridge 파일 읽기 실패");
         }
-        Debug.Log(bridgeLoadData.Bridge[0]);
+        //Debug.Log(bridgeLoadData.Bridge[0]);
 
     }
 

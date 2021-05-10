@@ -21,6 +21,7 @@ public class RoomState : MonoBehaviour
     [Header("Obstacle")]
     [SerializeField] private GameObject [] obstacleObject ; //장애물들
 
+    public bool IsPlay { get { return isPlay; } }
 
 
 
@@ -29,7 +30,8 @@ public class RoomState : MonoBehaviour
     {
         if (gameObject.transform.parent.GetComponent<Room>().RoomNumber != 0)
         {
-            nowMapType = (eMapType)Random.Range(0, 6);
+            //nowMapType = (eMapType)Random.Range(0, 6);
+            nowMapType = (eMapType)Random.Range(0, 2);
         }
         else
         {
@@ -97,6 +99,12 @@ public class RoomState : MonoBehaviour
         {
             obj.SetActive(state);
         }
+    }
+
+    public void RoomClear()
+    {
+        isClear = true;
+        isPlay = false;
     }
 
 }

@@ -251,7 +251,7 @@ Transform:
   m_GameObject: {fileID: 184414602549030240}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 8, y: 1, z: 8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 184414603555156127}
   m_RootOrder: 3
@@ -372,7 +372,7 @@ Transform:
   m_GameObject: {fileID: 184414602877625015}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 8, y: 1, z: 8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 184414603555156127}
   m_RootOrder: 1
@@ -402,7 +402,7 @@ Transform:
   m_GameObject: {fileID: 184414602887313597}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 8, y: 1, z: 8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 184414603555156127}
   m_RootOrder: 2
@@ -433,9 +433,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 184414603264296954}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
   m_LocalPosition: {x: -0.5, y: 2.48, z: 0}
-  m_LocalScale: {x: 1, y: 4, z: 0.01}
+  m_LocalScale: {x: 1, y: 4, z: 0.010000007}
   m_Children: []
   m_Father: {fileID: 184414603325899650}
   m_RootOrder: 3
@@ -564,6 +564,7 @@ Transform:
   - {fileID: 184414602877625008}
   - {fileID: 184414602887313598}
   - {fileID: 184414602549030241}
+  - {fileID: 5421908940664765775}
   - {fileID: 3754258663539400053}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -600,6 +601,7 @@ GameObject:
   - component: {fileID: 184414604009699465}
   - component: {fileID: 184414604009699478}
   - component: {fileID: 184414604009699479}
+  - component: {fileID: 4189754846493355436}
   m_Layer: 0
   m_Name: RoomBox
   m_TagString: Untagged
@@ -716,6 +718,60 @@ MonoBehaviour:
   - {fileID: 184414603264296954}
   obstacleObject:
   - {fileID: 3754258663539400054}
+--- !u!114 &4189754846493355436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184414604009699464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 771cc89201f23224e8891a3a4c712d09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomdata: {fileID: 184414603555156126}
+  roomState: {fileID: 184414604009699479}
+  forItemObject: {fileID: 184414602887313597}
+  forEnemyObject: {fileID: 184414602877625015}
+  forObstacleObject: {fileID: 5750940502968820458}
+  enemy:
+  - {fileID: 8332080098823969692, guid: ed3e429ba721b7544a55dc50c9caa862, type: 3}
+  - {fileID: 3080743842151432918, guid: 7b8daf7aa09ea8b47b8b84fff05068eb, type: 3}
+  Items:
+  - {fileID: 2191193587782746401, guid: b849d2ab9c815ac47bf0d37503cbe2b7, type: 3}
+  - {fileID: 6164574110790037913, guid: c9e9b4a493ccd6e45aff6f0f1b5f6f4a, type: 3}
+  - {fileID: 2191193587782746401, guid: f776d547eaa21d44eb4577b0b602b7ce, type: 3}
+--- !u!1 &5750940502968820458
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5421908940664765775}
+  m_Layer: 0
+  m_Name: ObjectForObstacle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &5421908940664765775
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5750940502968820458}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 184414603555156127}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &184414602626504690
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -826,7 +882,7 @@ PrefabInstance:
     - target: {fileID: 3933580122140985991, guid: c6f56c0e96228d64aa6399342d71b7b4,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3933580122140985991, guid: c6f56c0e96228d64aa6399342d71b7b4,
         type: 3}
