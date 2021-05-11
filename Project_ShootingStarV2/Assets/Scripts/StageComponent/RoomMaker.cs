@@ -41,13 +41,19 @@ public class RoomMaker : MonoBehaviour
             for (int i = 0; i < respawnSize; i++)
             {
                 Vector3 pos = new Vector3(Random.Range(roomdata.RoomWidth*0.15f, roomdata.RoomWidth*0.85f), 2, Random.Range(roomdata.RoomHeight*0.15f, roomdata.RoomHeight*0.85f));
-                if (Random.Range(1, 4) == 1)
+                int randSelected = Random.Range(0, 7);
+                if (randSelected == 1)
                 {
                     Instantiate(enemy[1], new Vector3(roomdata.Axis_LX,0,roomdata.Axis_LY)+ pos, Quaternion.identity, forEnemyObject.transform);
                 }
-                else
+                else if (randSelected % 2 == 0)
                 {
                     Instantiate(enemy[0], new Vector3(roomdata.Axis_LX, 0, roomdata.Axis_LY) + pos, Quaternion.identity, forEnemyObject.transform);
+                }
+                else
+                {
+                    Instantiate(enemy[2], new Vector3(roomdata.Axis_LX, 0, roomdata.Axis_LY) + pos, Quaternion.identity, forEnemyObject.transform);
+                    Instantiate(enemy[2], new Vector3(roomdata.Axis_LX, 0, roomdata.Axis_LY) + pos * 0.8f, Quaternion.identity, forEnemyObject.transform);
                 }
             }
 

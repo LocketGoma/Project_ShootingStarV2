@@ -31,7 +31,8 @@ public class PrecisionCollision : MonoBehaviour
 
                 if (hit.collider.tag == "Enemy")
                 {
-                    hit.collider.gameObject.GetComponent<EnemyStatus>().HurtHP(iDamage);
+                    if (hit.collider.gameObject.GetComponent<EnemyStatus>() != null)
+                        hit.collider.gameObject.GetComponent<EnemyStatus>().HurtHP(iDamage);
                 }
 
                 //이펙트 처리

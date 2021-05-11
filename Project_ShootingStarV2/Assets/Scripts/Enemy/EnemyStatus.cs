@@ -74,6 +74,8 @@ public class EnemyStatus : MonoBehaviour
             //아무튼 죽음
             nowHP = 0;
 
+            GetComponent<EnemyDropItem>().ItemDrop();
+
             Destroy(gameObject);
         }
     }

@@ -26,12 +26,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 prevPosB;           //2차 (한 프레임 늦게 갱신됨)
 
     private bool collisionWall = false;
-    public enum InputMode
-    {
-        PC,Mobile
-    }
-    
-    public InputMode controlMode;
+
 
     private bool isInvokeCooltime = false;
     private void Start()
@@ -42,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (controlMode == InputMode.PC)
+        if (ControlManager.instance.controlMode == ControlManager.InputMode.PC)
         {
             inputH = Input.GetAxis("Horizontal");
             inputV = Input.GetAxis("Vertical");
@@ -133,10 +128,10 @@ public class PlayerMovement : MonoBehaviour
 
     public void DragControl(Vector3 dir)
     {
-        if (controlMode == InputMode.Mobile)
+        if (ControlManager.instance.controlMode == ControlManager.InputMode.Mobile)
         {
-            inputH = dir.x;
-            inputV = dir.y;
+            inputH = dir.x*2;
+            inputV = dir.y*2;
         }
     }
 

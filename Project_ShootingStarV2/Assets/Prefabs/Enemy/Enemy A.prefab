@@ -546,6 +546,7 @@ GameObject:
   - component: {fileID: 8332080098823969666}
   - component: {fileID: 8332080098823969671}
   - component: {fileID: 8332080098823969664}
+  - component: {fileID: 4407586449701967034}
   m_Layer: 0
   m_Name: Enemy A
   m_TagString: Enemy
@@ -586,7 +587,7 @@ MonoBehaviour:
   nowMP: 0
   enemyType: 0
   enemyAttackType: 0
-  AttackDamage: 0
+  attackDamage: 0
 --- !u!114 &8332080098823969665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -651,3 +652,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &4407586449701967034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8332080098823969692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e9b413eaca939a48b2fb63973f22edd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDropTable: 370000000f0000000f000000
+  DropItems: 3
+  ItemDropPower: 0.89

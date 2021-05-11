@@ -15,9 +15,14 @@ public class CameraRoll : MonoBehaviour
 
     [SerializeField] private float gab = 0.5f;
 
+
+    private Vector2 mouseStartPos;
+
     // Start is called before the first frame update
     void Start()
     {
+
+
         pCamera = gameObject.GetComponent<Camera>();
         targetDirection = transform.localRotation.eulerAngles;
     }
@@ -26,10 +31,34 @@ public class CameraRoll : MonoBehaviour
     void Update()
     {
         Quaternion targetOrientation = Quaternion.Euler(targetDirection);       //카메라 회전 오일러 값 -> 쿼터니언으로 변환
-        Vector2 mouseDelta = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y")); //마우스 움직임 인식. (=vector2를 쓰는 이유)        
-        //new Vector2(prevMousePos.x-mouseDelta.x,mouseDelta.y)
-        mouseDelta = Vector2.Scale(mouseDelta, new Vector2(sensitivity.x * Smoothing.x, sensitivity.y * Smoothing.y));
-        
+        Vector2 mouseDelta= Vector2.zero;
+        if (ControlManager.instance.controlMode == ControlManager.InputMode.PC)
+        {
+            mouseDelta = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y")); //마우스 움직임 인식. (=vector2를 쓰는 이유)        
+                                                                                                        //new Vector2(prevMousePos.x-mouseDelta.x,mouseDelta.y)
+            mouseDelta = Vector2.Scale(mouseDelta, new Vector2(sensitivity.x * Smoothing.x, sensitivity.y * Smoothing.y));
+        }
+        else if (ControlManager.instance.controlMode == ControlManager.InputMode.Mobile)
+        {
+            if (Input.GetKeyUp(KeyCode.Mouse0))
+            {
+                mouseStartPos = Vector2.zero;
+                mouseDelta = Vector2.zero;
+            }
+
+            if (Input.GetKey(KeyCode.Mouse0))
+            {
+                if (mouseStartPos == Vector2.zero)
+                {
+                    mouseStartPos = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
+                }
+                mouseDelta = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
+            }
+
+            mouseDelta -= mouseStartPos;
+        }
+
+
         //보간 삽입
         mouseSmooth.x = Mathf.Lerp(mouseSmooth.x, mouseDelta.x, 1f / Smoothing.x);
         mouseSmooth.y = Mathf.Lerp(mouseSmooth.y, mouseDelta.y, 1f / Smoothing.y);

@@ -13,7 +13,7 @@ public class JoyStick : MonoBehaviour
     private Vector3 JoyDir;
     private float Radius;
 
-
+    //https://truecode.tistory.com/32
     // Start is called before the first frame update
     void Start()
     {

@@ -27,11 +27,11 @@ TagManager:
   - PlayerWeapon
   - EnemyWeapon
   - Enemy
+  - Effect
   - 
   - 
-  - 
-  - 
-  - 
+  - MiniMap
+  - MiniMapPlusTarget
   - 
   - 
   - 
