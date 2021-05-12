@@ -17,6 +17,9 @@ public class EnemyTracking : MonoBehaviour
     public float trackingRange;
     [Range(0, 100)]
     public float attackRange;
+    private float rangeGab;
+    [Range(0,1.0f)]
+    [SerializeField] private float rangeGabPercent;
 
     [Header("Speed")]
     [Range(0, 100)]
@@ -27,6 +30,7 @@ public class EnemyTracking : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        rangeGab = 0.0f;
         trackState = eTrackState.Finding;
         targetObject = GameObject.FindGameObjectWithTag("Player");
     }
@@ -34,9 +38,10 @@ public class EnemyTracking : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ((targetObject.transform.position - gameObject.transform.position).magnitude < attackRange)
+        if ((targetObject.transform.position - gameObject.transform.position).magnitude < attackRange + rangeGab)
         {
             trackState = eTrackState.InAttackRange;
+            rangeGab = attackRange * rangeGabPercent;
 
             transform.rotation = GetRotFromVectors(gameObject.transform.position, targetObject.transform.position);
 
@@ -45,6 +50,8 @@ public class EnemyTracking : MonoBehaviour
         //트래킹 사거리보다 짧으면 트래킹
         else if ((targetObject.transform.position - gameObject.transform.position).magnitude < trackingRange)
         {
+            rangeGab = 0.0f;
+
             trackState = eTrackState.Tracking;
             transform.rotation = GetRotFromVectors(gameObject.transform.position, targetObject.transform.position);
 

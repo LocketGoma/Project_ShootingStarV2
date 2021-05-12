@@ -163,7 +163,7 @@ public class PlayerStatus : MonoBehaviour
 
     public void HurtHP(int iDamage)
     {
-        Debug.Log("nowHurt"+iDamage);
+        //Debug.Log("nowHurt"+iDamage);
 
         if (useMagicShield)
         {

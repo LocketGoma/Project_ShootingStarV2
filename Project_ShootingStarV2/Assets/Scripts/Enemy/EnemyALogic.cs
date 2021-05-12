@@ -66,10 +66,9 @@ public class EnemyALogic : MonoBehaviour
 
                 if (boxCastHit)
                 {
-                    Debug.Log(hit.collider.tag);
+                   // Debug.Log(hit.collider.tag);
                     if (hit.collider.tag == "Player")
                     {
-                        Debug.Log("Attack");
                         hit.collider.gameObject.transform.parent.GetComponent<PlayerStatus>().HurtHP(GetComponent<EnemyStatus>().AttackDamage);
                         nowAttackLock = true;
                     }

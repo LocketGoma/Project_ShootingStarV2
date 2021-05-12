@@ -91,6 +91,7 @@ MonoBehaviour:
   trackState: 0
   trackingRange: 25
   attackRange: 8
+  rangeGabPercent: 0.5
   moveSpeed: 0.8
   targetObject: {fileID: 0}
 --- !u!65 &3080743842151432920
