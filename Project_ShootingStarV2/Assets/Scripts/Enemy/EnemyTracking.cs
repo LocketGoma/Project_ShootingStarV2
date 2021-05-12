@@ -18,7 +18,7 @@ public class EnemyTracking : MonoBehaviour
     [Range(0, 100)]
     public float attackRange;
     private float rangeGab;
-    [Range(0,1.0f)]
+    [Range(0,5.0f)]
     [SerializeField] private float rangeGabPercent;
 
     [Header("Speed")]

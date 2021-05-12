@@ -6,7 +6,6 @@ public class EnemyALogic : MonoBehaviour
 {
     private EnemyTracking trackingLogic;
     private EnemyTracking.eTrackState prevTrackState;
-    [SerializeField] GameObject targetObject;
     public LayerMask layerMask;
 
     [Range(0,10.0f)]
@@ -34,9 +33,6 @@ public class EnemyALogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(targetObject.transform.localScale);
-        //targetObject.transform.localScale = new Vector3(0.35f, 0.35f, 0.45f);
-        //Debug.Log(targetObject.transform.localScale);
 
         if (prevTrackState != trackingLogic.TrackState)
         {

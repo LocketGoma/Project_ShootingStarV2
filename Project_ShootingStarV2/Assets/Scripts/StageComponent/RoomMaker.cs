@@ -16,6 +16,8 @@ public class RoomMaker : MonoBehaviour
 
     [Header("Enemy")]
     [SerializeField] private GameObject [] enemy;
+    [SerializeField] private int[] enemySpawnTable;
+    private int maxPercent = 0;
 
     [Header("Items")]
     [SerializeField] private GameObject[] Items;
@@ -25,7 +27,15 @@ public class RoomMaker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        for (int i = 0; i < enemySpawnTable.Length; i++)
+        {
+            maxPercent += enemySpawnTable[i];
+        }
 
+        if (enemy.Length != enemySpawnTable.Length)
+        {
+            Debug.LogError("Error : Enemy Table size is not equal compare to Enemy Spawn Table!");
+        }
     }
 
     // Update is called once per frame
@@ -41,20 +51,9 @@ public class RoomMaker : MonoBehaviour
             for (int i = 0; i < respawnSize; i++)
             {
                 Vector3 pos = new Vector3(Random.Range(roomdata.RoomWidth*0.15f, roomdata.RoomWidth*0.85f), 2, Random.Range(roomdata.RoomHeight*0.15f, roomdata.RoomHeight*0.85f));
-                int randSelected = Random.Range(0, 7);
-                if (randSelected == 1)
-                {
-                    Instantiate(enemy[1], new Vector3(roomdata.Axis_LX,0,roomdata.Axis_LY)+ pos, Quaternion.identity, forEnemyObject.transform);
-                }
-                else if (randSelected % 2 == 0)
-                {
-                    Instantiate(enemy[0], new Vector3(roomdata.Axis_LX, 0, roomdata.Axis_LY) + pos, Quaternion.identity, forEnemyObject.transform);
-                }
-                else
-                {
-                    Instantiate(enemy[2], new Vector3(roomdata.Axis_LX, 0, roomdata.Axis_LY) + pos, Quaternion.identity, forEnemyObject.transform);
-                    Instantiate(enemy[2], new Vector3(roomdata.Axis_LX, 0, roomdata.Axis_LY) + pos * 0.8f, Quaternion.identity, forEnemyObject.transform);
-                }
+                
+                Instantiate(enemy[RandomIndex()], new Vector3(roomdata.Axis_LX,0,roomdata.Axis_LY)+ pos, Quaternion.identity, forEnemyObject.transform);
+                
             }
 
             isSpawn = true;
@@ -67,4 +66,22 @@ public class RoomMaker : MonoBehaviour
 
      //if enemyobject.child == 0 -> clear   
     }
+
+    private int RandomIndex()
+    {
+        int rand = Random.Range(0, maxPercent);
+        int nowCount = 0;
+
+        for (int i = 0; i < enemySpawnTable.Length; i++)
+        {
+            nowCount += enemySpawnTable[i];
+            if (rand < nowCount)
+            {
+                return i;
+            }
+        }
+        return 0;
+    }
+
+
 }

@@ -6,7 +6,6 @@ public class EnemyBLogic : MonoBehaviour
 {
     private EnemyTracking trackingLogic;
     private EnemyTracking.eTrackState prevTrackState;
-    [SerializeField] private GameObject targetObject;
     [SerializeField] private GameObject shootAmmo;
     public LayerMask layerMask;
 

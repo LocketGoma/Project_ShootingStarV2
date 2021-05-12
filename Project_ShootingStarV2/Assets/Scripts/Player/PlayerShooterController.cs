@@ -190,11 +190,10 @@ public class PlayerShooterController : MonoBehaviour
         if (checkRayHit && CounterColliderCheck(hit))
         {
 
-            toTargetRange = (hit.point - gameObject.transform.position).magnitude;
+            //toTargetRange = (hit.point - gameObject.transform.position).magnitude;
             ammoDir = hit.point - handPosition.transform.position;
-            ;
-            Instantiate(weaponAmmo, handPosition.transform.position, transform.rotation).GetComponent<Rigidbody>().AddForce(ammoDir.normalized * weaponAmmoSpeed, ForceMode.Impulse);
 
+            Instantiate(weaponAmmo, handPosition.transform.position, transform.rotation).GetComponent<Rigidbody>().AddForce(ammoDir.normalized * weaponAmmoSpeed, ForceMode.Impulse);
         }
         else
         {
@@ -202,8 +201,6 @@ public class PlayerShooterController : MonoBehaviour
             ammoDir = ray.direction * toTargetRange;// - handPosition.transform.position;
             Instantiate(weaponAmmo, handPosition.transform.position, transform.rotation).GetComponent<Rigidbody>().AddForce(ammoDir.normalized * weaponAmmoSpeed, ForceMode.Impulse);
         }
-
-
         return true;
     }
         
