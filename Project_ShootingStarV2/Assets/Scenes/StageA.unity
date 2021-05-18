@@ -859,7 +859,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 842357804, guid: 311c14fc2f47af449924ddf33df880cb, type: 3}
       propertyPath: m_TagString
-      value: Player
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 842357804, guid: 311c14fc2f47af449924ddf33df880cb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 608039405833500397, guid: 311c14fc2f47af449924ddf33df880cb,
         type: 3}
@@ -8187,6 +8191,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy Boss
+      objectReference: {fileID: 0}
+    - target: {fileID: 7775362686392747657, guid: 14ac0db7fad2ecd40833bf57363ae747,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14ac0db7fad2ecd40833bf57363ae747, type: 3}
