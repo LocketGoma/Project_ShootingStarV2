@@ -34,7 +34,7 @@ public class EnemyELogic : MonoBehaviour
     //발사 방식
     //1. 쿨타임 > 인터벌일때 플레이어 좌표 저장
     //2. 쿨타임 = 0
-    //3. 다시 쿨타임 > 인터벌이 될때 이전 좌표로 사격 후 다시 좌표 변경
+    //3. 다시 쿨타임 > 인터벌이 될때 이전 좌표로 사격 후 다시 좌표 변경 - 까지 구현
     //4. 글로벌 쿨타임이 차면 사격 1턴 쉼.
     // Start is called before the first frame update
     void Start()
@@ -84,7 +84,7 @@ public class EnemyELogic : MonoBehaviour
                     Debug.Log(hit.collider.tag);
                     if (hit.collider.tag == "Player")
                     {
-                        Debug.Log("attackDamage" + attackDamage);
+                        //Debug.Log("attackDamage" + attackDamage);
                         hit.collider.gameObject.transform.parent.GetComponent<PlayerStatus>().HurtHP(attackDamage);
                     }
                     targetPosition = hit.point;
@@ -102,7 +102,7 @@ public class EnemyELogic : MonoBehaviour
     {
         lineRenderer.SetPosition(0, transform.position);
 
-        Debug.Log("Hit state :" + checkRayHit);
+        //Debug.Log("Hit state :" + checkRayHit);
 
         if (checkRayHit == true)
             lineRenderer.SetPosition(1, targetPosition);

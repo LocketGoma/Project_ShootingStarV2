@@ -57,9 +57,11 @@ public class EnemyBLogic : MonoBehaviour
             if (nowAttackLock == false)
             {
                 
-                Vector3 pos = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);               
+                Vector3 pos = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
 
-                Instantiate(shootAmmo, pos, transform.rotation);
+                  Instantiate(shootAmmo, pos, transform.rotation);
+                
+
                 nowAttackLock = true;
             }
 

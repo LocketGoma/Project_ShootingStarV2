@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3757420326430474249}
   - component: {fileID: 3757420326421426175}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Simple Enemy A AnimTest
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -64,7 +64,7 @@ GameObject:
   - component: {fileID: 3757420326430474251}
   - component: {fileID: 3757420326427607099}
   - component: {fileID: 3757420326428705531}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: RightFoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,7 +141,7 @@ GameObject:
   - component: {fileID: 3757420326430474253}
   - component: {fileID: 3757420326427607101}
   - component: {fileID: 3757420326428705533}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: LeftFoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -216,7 +216,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3757420326430474255}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Bone_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -247,7 +247,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3757420326430474257}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Bone_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -278,7 +278,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3757420326430474259}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Bone_Foot_R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -308,7 +308,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3757420326430474261}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Bone_Foot_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -340,7 +340,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3757420326430474263}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Bone_Foot_L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -370,7 +370,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3757420326430474265}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Bone_Foot_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -402,7 +402,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3757420326430474267}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Bone_Body_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -432,7 +432,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3757420326430474269}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Bone_Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -466,7 +466,7 @@ GameObject:
   - component: {fileID: 3757420326430474271}
   - component: {fileID: 3757420326427607103}
   - component: {fileID: 3757420326428705535}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -547,7 +547,7 @@ GameObject:
   - component: {fileID: 8332080098823969671}
   - component: {fileID: 8332080098823969664}
   - component: {fileID: 4407586449701967034}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Enemy A
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -600,7 +600,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948c11f2950ef91429cd7f5f7b0b7ed3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetObject: {fileID: 3757420326430907433}
   layerMask:
     serializedVersion: 2
     m_Bits: 1024

@@ -2,7 +2,7 @@
 {
     Properties
     {
-        _MainTex("Albedo(RGB)",2D) = ""{}
+        _MainTex("Albedo(RGB)",2D) = "white"{}
         _BumpMap("Water Bump",2D) = "bump"{}
     }
         SubShader
@@ -13,15 +13,13 @@
 
         CGPROGRAM
         // Physically based Standard lighting model, and enable shadows on all light types
-        #pragma surface surf Lambert alpha:fade
+        #pragma surface surf Lambert alpha:blend
 
         // Use shader model 3.0 target, to get nicer looking lighting
         #pragma target 3.0
 
         sampler2D _MainTex;
         sampler2D _BumpMap;
-
-
 
         struct Input
         {
@@ -45,8 +43,9 @@
             float3 fNormalA = UnpackNormal(tex2D(_BumpMap, IN.uv_BumpMap + float2(_Time.y * 0.005, 0.0f)));
             float3 fNormalB = UnpackNormal(tex2D(_BumpMap, IN.uv_BumpMap - float2(_Time.y * 0.015, _Time.y * 0.02)));
 
-            o.Normal = fNormalA + fNormalB;
-            o.Albedo = tex2D(_MainTex,WorldReflectionVector(IN,o.Normal));
+            o.Normal = (fNormalA + fNormalB)*0.5;
+            o.Normal *= float3(0.5, 0.5, 1);
+            o.Albedo = tex2D(_MainTex,WorldReflectionVector(IN,o.Normal))*0.5;
 
 
             float fRim = dot(IN.viewDir, o.Normal);

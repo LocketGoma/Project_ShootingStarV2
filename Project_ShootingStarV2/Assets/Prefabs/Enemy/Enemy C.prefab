@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3080743842151432920}
   - component: {fileID: 3080743842151432919}
   - component: {fileID: 8062490866755162136}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Enemy C
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -68,14 +68,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 268fc5b057c960d4398914407b2a2419, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetObject: {fileID: 2047159253306683555}
-  shootAmmo: {fileID: 2501265074409954245, guid: 2b1a91251d31bcb448704263b29afc91,
+  shootAmmo: {fileID: 595775934607907909, guid: 429634298d8d39742aadb928bd707aec,
     type: 3}
   layerMask:
     serializedVersion: 2
     m_Bits: 1024
   AttackRange: 2.5
-  AttackCooltime: 1.26
+  AttackCooltime: 2.25
 --- !u!114 &3080743842151432921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,9 +144,69 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1414604872323896388}
     m_Modifications:
+    - target: {fileID: 100000, guid: 4bdf630ee339368429c99c5c922b08ca, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 4bdf630ee339368429c99c5c922b08ca, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 4bdf630ee339368429c99c5c922b08ca, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 4bdf630ee339368429c99c5c922b08ca, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 100008, guid: 4bdf630ee339368429c99c5c922b08ca, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 100010, guid: 4bdf630ee339368429c99c5c922b08ca, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 100012, guid: 4bdf630ee339368429c99c5c922b08ca, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 100014, guid: 4bdf630ee339368429c99c5c922b08ca, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 100016, guid: 4bdf630ee339368429c99c5c922b08ca, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 100018, guid: 4bdf630ee339368429c99c5c922b08ca, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 100020, guid: 4bdf630ee339368429c99c5c922b08ca, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 100022, guid: 4bdf630ee339368429c99c5c922b08ca, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 100024, guid: 4bdf630ee339368429c99c5c922b08ca, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 100026, guid: 4bdf630ee339368429c99c5c922b08ca, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 100028, guid: 4bdf630ee339368429c99c5c922b08ca, type: 3}
       propertyPath: m_Name
       value: Simple Enemy C
+      objectReference: {fileID: 0}
+    - target: {fileID: 100028, guid: 4bdf630ee339368429c99c5c922b08ca, type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 400028, guid: 4bdf630ee339368429c99c5c922b08ca, type: 3}
       propertyPath: m_LocalPosition.x
@@ -211,12 +270,6 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: bf5943c9a07554c4b849c3fb15bc57d2, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4bdf630ee339368429c99c5c922b08ca, type: 3}
---- !u!1 &2047159253306683555 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100028, guid: 4bdf630ee339368429c99c5c922b08ca,
-    type: 3}
-  m_PrefabInstance: {fileID: 2047159253306586655}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2047159253306190979 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400028, guid: 4bdf630ee339368429c99c5c922b08ca,

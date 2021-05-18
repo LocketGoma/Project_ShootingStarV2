@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MissileNormal : MonoBehaviour
 {
@@ -34,7 +32,6 @@ public class MissileNormal : MonoBehaviour
         //파티클 팡 터트려주고
         if (other.collider.tag != "Enemy")
             Destroy(gameObject);
-
     }
 
 }
