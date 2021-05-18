@@ -67,6 +67,8 @@ public class BossTracking : MonoBehaviour
                 trackState = eBossTrackState.InAttackRange;
                 rangeGab = attackRange * rangeGabPercent;
 
+                
+
                 transform.rotation = GetRotFromVectors(gameObject.transform.position, targetObject.transform.position);
 
                 //Attack

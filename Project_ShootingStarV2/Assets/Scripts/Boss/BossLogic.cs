@@ -4,30 +4,13 @@ using UnityEngine;
 
 public class BossLogic : MonoBehaviour
 {
+    private BossAttackLogic attackLogic;
     private BossTracking trackingLogic;
     private BossTracking.eBossTrackState prevTrackState;
     public LayerMask layerMask;
 
     [Range(0, 10.0f)]
     [SerializeField] private float attackRange = 2.5f;
-
-    [Header("Patton Interval")]
-    //각 공격별 인터벌
-    [Range(0, 10.0f)]
-    [SerializeField] private float attackAInterval;
-    private float attackACooltime;
-    private bool atackALock;
-
-    [Range(0, 10.0f)]
-    [SerializeField] private float attackBInterval;
-    private float attackBCooltime;
-    private bool atackBLock;
-
-    [Range(0, 10.0f)]
-    [SerializeField] private float attackCInterval;
-    private float attackCCooltime;
-    private bool atackCLock;
-
 
     [Header("Global Timer")]
     //패턴별 인터벌
@@ -36,6 +19,7 @@ public class BossLogic : MonoBehaviour
     [Range(0, 25.0f)]
     [SerializeField] private float pattonInterval;
     private float pattonCooltime;
+    private bool pattonLock;
 
     private RaycastHit hit;
     private bool boxCastHit;
@@ -50,9 +34,15 @@ public class BossLogic : MonoBehaviour
         {
             Debug.LogError("Boss Tracking Logic is not Ready!");
         }
-
+        attackLogic = gameObject.GetComponent<BossAttackLogic>();
+        if (attackLogic == null)
+        {
+            Debug.LogError("Boss Attack Logic is not Ready!");
+        }
 
         gameObject.transform.GetChild(0).GetComponent<Animator>().Play("Idle", -1, 0.0f);
+
+        pattonLock = false;
     }
 
     // Update is called once per frame
@@ -70,6 +60,7 @@ public class BossLogic : MonoBehaviour
                     break;
                 case BossTracking.eBossTrackState.InAttackRange:
                     gameObject.transform.GetChild(0).GetComponent<Animator>().Play("Idle", -1, 0.0f);
+                    attackLogic.PattonA();
                     break;
                 case BossTracking.eBossTrackState.NoTracking:
                     break;
@@ -79,11 +70,24 @@ public class BossLogic : MonoBehaviour
                     break;
             }
             prevTrackState = trackingLogic.TrackState;
+        }
+                
+        pattonCooltime += Time.deltaTime;
+        if (pattonLock == false && pattonCooltime > pattonLifeTime)
+        {
+            pattonLock = true;
+            pattonCooltime = 0;
 
-
+            attackLogic.PattonStop();
+        }
+        else if (pattonLock == true && pattonCooltime > pattonInterval)
+        {
+            pattonLock = false;
+            pattonCooltime = 0;
+            
+            attackLogic.PattonA();
 
         }
-
 
 
     }
