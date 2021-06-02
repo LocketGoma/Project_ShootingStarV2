@@ -90,7 +90,13 @@ public class TestRay : MonoBehaviour
 
                 if (hit.collider.tag == "Enemy")
                 {
-                    hit.collider.gameObject.GetComponent<EnemyStatus>().HurtHP(exploseDamage);
+                    if (hit.collider.gameObject.GetComponent<EnemyStatus>() != null)
+                        hit.collider.gameObject.GetComponent<EnemyStatus>().HurtHP(exploseDamage);
+                }
+                if (hit.collider.tag == "Boss")
+                {
+                    if (hit.collider.gameObject.GetComponent<BossStatus>() != null)
+                        hit.collider.gameObject.GetComponent<BossStatus>().HurtHP(exploseDamage);
                 }
             }
         }

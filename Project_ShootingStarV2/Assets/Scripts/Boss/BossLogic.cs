@@ -60,7 +60,7 @@ public class BossLogic : MonoBehaviour
                     break;
                 case BossTracking.eBossTrackState.InAttackRange:
                     gameObject.transform.GetChild(0).GetComponent<Animator>().Play("Idle", -1, 0.0f);
-                    attackLogic.PattonA();
+                    attackLogic.PattonD();
                     break;
                 case BossTracking.eBossTrackState.NoTracking:
                     break;
@@ -78,7 +78,7 @@ public class BossLogic : MonoBehaviour
             pattonLock = true;
             pattonCooltime = 0;
 
-            attackLogic.PattonStop();
+            //attackLogic.PattonStop();
         }
         else if (pattonLock == true && pattonCooltime > pattonInterval)
         {

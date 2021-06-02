@@ -81,7 +81,7 @@ public class EnemyELogic : MonoBehaviour
                 checkRayHit = Physics.Raycast(ray, out hit, ReachRange);
                 if (checkRayHit)
                 {
-                    Debug.Log(hit.collider.tag);
+                    //Debug.Log(hit.collider.tag);
                     if (hit.collider.tag == "Player")
                     {
                         //Debug.Log("attackDamage" + attackDamage);

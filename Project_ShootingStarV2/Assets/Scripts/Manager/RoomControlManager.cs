@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class RoomControlManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public static RoomControlManager instance;
 
-    // Update is called once per frame
-    void Update()
+    public enum BossRoomMode
     {
-        
+        Auto, Fixed, None
     }
+    [Header("Boss Room Mode")]
+    public BossRoomMode roomMode;
+
+    public int roomNumber;
+
+
 }

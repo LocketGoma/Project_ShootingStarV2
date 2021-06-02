@@ -42,8 +42,9 @@
         {            
             float3 fNormalA = UnpackNormal(tex2D(_BumpMap, IN.uv_BumpMap + float2(_Time.y * 0.005, 0.0f)));
             float3 fNormalB = UnpackNormal(tex2D(_BumpMap, IN.uv_BumpMap - float2(_Time.y * 0.015, _Time.y * 0.02)));
+            float3 fNormalC = UnpackNormal(tex2D(_BumpMap, IN.uv_BumpMap + float2(_Time.y * -0.020, _Time.y * 0.025)));
 
-            o.Normal = (fNormalA + fNormalB)*0.5;
+            o.Normal = (fNormalA + fNormalB + fNormalC)*(1.0f/3.0f);
             o.Normal *= float3(0.5, 0.5, 1);
             o.Albedo = tex2D(_MainTex,WorldReflectionVector(IN,o.Normal))*0.5;
 

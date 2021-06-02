@@ -31,12 +31,22 @@ public class RoomState : MonoBehaviour
         if (gameObject.transform.parent.GetComponent<Room>().RoomNumber != 0)
         {
             //nowMapType = (eMapType)Random.Range(0, 6);
-            nowMapType = (eMapType)Random.Range(0, 2);
+            // nowMapType = (eMapType)Random.Range(0, 2);
+            nowMapType = eMapType.NormalBattle;
         }
         else
         {
             nowMapType = eMapType.SafeZone;
         }
+        
+        if (RoomControlManager.instance.roomMode == RoomControlManager.BossRoomMode.Fixed)
+        {
+            if (gameObject.transform.parent.GetComponent<Room>().RoomNumber == RoomControlManager.instance.roomNumber)
+            {
+                nowMapType = eMapType.Boss;
+            }
+        }
+
         RoomActive(false);
         ObstacleActive(false);
     }
@@ -60,7 +70,7 @@ public class RoomState : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //Debug.Log("StageTag:"+other.gameObject.tag);
+        Debug.Log("StageTag:"+other.gameObject.tag);
 
         if (nowMapType == eMapType.SafeZone || isClear == true)
         {
@@ -69,10 +79,16 @@ public class RoomState : MonoBehaviour
 
         if (other.gameObject.tag == "Player")
         {
-            //Invoke("RoomForceActive", 1.0f);
+            
             RoomActive(true);
             ObstacleActive(true);
             //other.transform.position = gameObject.transform.position;
+
+
+            if (nowMapType == eMapType.Boss)
+            {
+                ObstacleActive(false);
+            }
 
             isPlay = true;
         }

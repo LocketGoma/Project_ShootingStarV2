@@ -28,7 +28,7 @@ TagManager:
   - EnemyWeapon
   - Enemy
   - Effect
-  - 
+  - CameraLayer
   - 
   - MiniMap
   - MiniMapPlusTarget

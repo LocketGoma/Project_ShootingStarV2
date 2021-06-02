@@ -48,7 +48,7 @@ public class BossStatus : MonoBehaviour
             //아무튼 죽음
             nowHP = 0;
 
-            GetComponent<EnemyDropItem>().ItemDrop();
+            //GetComponent<EnemyDropItem>().ItemDrop();
 
             DeadMotion();
         }

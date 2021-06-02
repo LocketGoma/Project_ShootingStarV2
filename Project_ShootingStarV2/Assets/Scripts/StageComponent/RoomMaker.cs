@@ -19,6 +19,9 @@ public class RoomMaker : MonoBehaviour
     [SerializeField] private int[] enemySpawnTable;
     private int maxPercent = 0;
 
+    [Header("Boss")]
+    [SerializeField] private GameObject bossData;
+
     [Header("Items")]
     [SerializeField] private GameObject[] Items;
 
@@ -42,20 +45,27 @@ public class RoomMaker : MonoBehaviour
     void Update()
     {
 
-        if (roomState.nowMapType == RoomState.eMapType.NormalBattle && isSpawn == false && roomState.IsPlay == true)
+        if (isSpawn == false && roomState.IsPlay == true)
         {
-            forEnemyObject.SetActive(true);
-
-            int respawnSize = Random.Range(1, 10);
-
-            for (int i = 0; i < respawnSize; i++)
+            if (roomState.nowMapType == RoomState.eMapType.NormalBattle)
             {
-                Vector3 pos = new Vector3(Random.Range(roomdata.RoomWidth*0.15f, roomdata.RoomWidth*0.85f), 2, Random.Range(roomdata.RoomHeight*0.15f, roomdata.RoomHeight*0.85f));
-                
-                Instantiate(enemy[RandomIndex()], new Vector3(roomdata.Axis_LX,0,roomdata.Axis_LY)+ pos, Quaternion.identity, forEnemyObject.transform);
-                
-            }
+                forEnemyObject.SetActive(true);
 
+                int respawnSize = Random.Range(1, 10);
+
+                for (int i = 0; i < respawnSize; i++)
+                {
+                    Vector3 pos = new Vector3(Random.Range(roomdata.RoomWidth * 0.15f, roomdata.RoomWidth * 0.85f), 2, Random.Range(roomdata.RoomHeight * 0.15f, roomdata.RoomHeight * 0.85f));
+
+                    Instantiate(enemy[RandomIndex()], new Vector3(roomdata.Axis_LX, 0, roomdata.Axis_LY) + pos, Quaternion.identity, forEnemyObject.transform);
+
+                }                
+            }
+            else if (roomState.nowMapType == RoomState.eMapType.Boss)
+            {
+                forEnemyObject.SetActive(true);
+                Instantiate(bossData, new Vector3((roomdata.Axis_LX + roomdata.Axis_RX) / 2, 1, (roomdata.Axis_LY + roomdata.Axis_RY) / 2), Quaternion.identity, forEnemyObject.transform);
+            }
             isSpawn = true;
         }
         

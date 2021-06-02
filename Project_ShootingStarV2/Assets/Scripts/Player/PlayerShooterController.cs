@@ -37,6 +37,16 @@ public class PlayerShooterController : MonoBehaviour
     private float weaponCooltime = float.MaxValue;
     private Vector3 ammoDir;
 
+    [Header("Auto Targeting")]
+    [Range(0, 15.0f)]
+    [SerializeField] private float AutoTargetRange;
+    [SerializeField] private bool autoTargetState;
+    [Tooltip("오토타게팅 된 적")]
+    [SerializeField] private GameObject autoLookTarget;
+    [Tooltip("오토타게팅 마크")]
+    [SerializeField] private GameObject autoTargetMarker;
+    [SerializeField] private LayerMask layerMask;
+
 
     [Header("TargetLook")]
     [SerializeField] private Camera targetCamera;
@@ -46,6 +56,7 @@ public class PlayerShooterController : MonoBehaviour
     {
         weaponHandGun.SetActive(false);
         weaponRifle.SetActive(false);
+        autoTargetMarker.SetActive(false);
     }
 
     // Update is called once per frame
@@ -59,6 +70,24 @@ public class PlayerShooterController : MonoBehaviour
             GetComponent<PlayerStatus>().SetAmmoUseCount((int)motionState);
         }
 
+        //이거 정밀사격 옵션에다 넣어둡시다. 발동시 초당 1mp 소비.
+        AutoTargetSystem();
+        
+        if (Input.GetKey(KeyCode.X))
+        {
+            if (autoTargetState == true)
+            {
+                // autoTargetMarker.SetActive(true);
+                targetCamera.transform.LookAt(autoLookTarget.transform);
+                autoTargetMarker.transform.position = targetCamera.ViewportToScreenPoint(new Vector3(0.5f, 0.5f, 0.5f));
+            }
+        }
+       // else
+       // {
+            //autoTargetMarker.SetActive(false);
+        //}
+
+        //여기까지
 
         anim.SetInteger("WeaponType", (int)motionState);
 
@@ -204,10 +233,44 @@ public class PlayerShooterController : MonoBehaviour
         return true;
     }
         
+    private void AutoTargetSystem()
+    {        
+        RaycastHit[] checkRayHit = Physics.SphereCastAll(targetCamera.ScreenToWorldPoint(new Vector3(0.5f, 0.5f, 0f)), AutoTargetRange, targetCamera.transform.forward,weaponMaxRange, layerMask);
+        autoLookTarget = null;
 
+        float minDistance = float.MaxValue;        
+
+        for (int i = 0; i < checkRayHit.Length; i++)
+        {
+            Vector3 targetPos = targetCamera.WorldToScreenPoint(checkRayHit[i].collider.transform.position);
+            float screenDistance = (new Vector2(targetPos.x,targetPos.y) - (new Vector2(targetCamera.pixelWidth/2, targetCamera.pixelHeight/2))).magnitude;
+            
+            if ((checkRayHit[i].collider.CompareTag("Enemy") || checkRayHit[i].collider.CompareTag("Boss"))&& screenDistance < minDistance)
+            {
+                minDistance = screenDistance;
+                autoLookTarget = checkRayHit[i].collider.gameObject;
+            }
+        }
+
+        if (autoLookTarget != null)
+        {
+            autoTargetState = true;
+            autoTargetMarker.SetActive(true);
+            //targetCamera.transform.LookAt(autoLookTarget.transform);          //이건 자동조준포함시
+            autoTargetMarker.transform.position = targetCamera.WorldToScreenPoint(autoLookTarget.transform.position);
+        }
+        else
+        {
+            autoTargetState = false;
+            autoTargetMarker.SetActive(false);
+        }
+    }
+
+
+    //https://sorting.tistory.com/12
     private bool CounterColliderCheck(RaycastHit hit)
     {
-        if (hit.collider.tag != "Player" && hit.collider.tag != "PlayerAvatar" && hit.collider.tag != "DeadSpace")
+        if (!hit.collider.CompareTag("Player") && !(hit.collider.CompareTag("PlayerAvatar") && !(hit.collider.CompareTag("DeadSpace"))))
             return true;
 
         return false;

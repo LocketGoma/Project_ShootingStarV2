@@ -70,9 +70,9 @@ public class PlayerStatus : MonoBehaviour
         //mpRestoreTime = 100.0f;
 
 
-        nowHP = 1;
+        nowHP = 100;
         nowMP = fullMP;
-        HPWarning = true;
+        //HPWarning = true;
 
         HPWarningPercent = 0.2f;
     }
@@ -100,7 +100,11 @@ public class PlayerStatus : MonoBehaviour
         HPBar.transform.localScale = new Vector3((nowHP / fullHP),1,1);
         MPBar.transform.localScale = new Vector3((nowMP / fullMP),1,1);
         HPText.text = (int)nowHP + "/" + fullHP;
-        MPText.text = (int)nowMP + "/" + fullMP;
+        if (useMagicShield)
+            MPText.text = (int)nowMP + "/" + fullMP + "<S>";
+        else
+            MPText.text = (int)nowMP + "/" + fullMP;
+        
 
         nowAmmoText.text = nowAmmo.ToString();
         if (useCountAmmo != 0)
@@ -127,6 +131,17 @@ public class PlayerStatus : MonoBehaviour
             StartCoroutine("WarningMPSign");
             MPWarning = false;
         }
+
+        //디버그 코드들
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            useMagicShield = useMagicShield == false;
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            HurtHP(25);
+        }
+
     }
 
     public bool ShootAmmo(int ammoCrate)
@@ -184,6 +199,11 @@ public class PlayerStatus : MonoBehaviour
         {
             nowHP = 0;                
         }
+        if (nowHP < 40 && HPWarning == false)
+        {
+            HPWarning = true;
+        }
+
     }
 
     public bool UseMP(int iCost) 

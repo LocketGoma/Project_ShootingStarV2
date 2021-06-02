@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1.5
   damage: 10
-  trackingInterval: 0.75
+  trackingInterval: 0.5
   weaponLifetime: 10
   targetObject: {fileID: 0}
   targetDist: {x: 0, y: 0, z: 0}

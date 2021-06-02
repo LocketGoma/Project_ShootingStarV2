@@ -34,7 +34,7 @@ public class MissileChaser : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(transform.forward);
+        //Debug.Log(transform.forward);
 
         transform.position += (transform.forward * speed * Time.deltaTime);
         transform.rotation = Quaternion.Lerp(transform.rotation, trackRotate, Time.deltaTime);

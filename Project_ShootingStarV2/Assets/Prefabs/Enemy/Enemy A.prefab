@@ -587,7 +587,7 @@ MonoBehaviour:
   nowMP: 0
   enemyType: 0
   enemyAttackType: 0
-  attackDamage: 0
+  attackDamage: 10
 --- !u!114 &8332080098823969665
 MonoBehaviour:
   m_ObjectHideFlags: 0
