@@ -10,9 +10,7 @@ public class BossAttackLogic : MonoBehaviour
     [SerializeField] private GameObject normalMissile;
     [SerializeField] private GameObject bigMissile;
     [SerializeField] private GameObject meteoStone;
-    [SerializeField] private GameObject tauntObject;            //나중에 이펙트 넣으시오
-
-    
+    [SerializeField] private GameObject tauntObject;            //나중에 이펙트 넣으시오    
 
     [Header("Batch Obejcts")]
     [SerializeField] private GameObject missilePodL;
