@@ -36,6 +36,7 @@ public class BossAttackLogic : MonoBehaviour
     //쿨타임 변수 : 공격 종료후 쿨타임
     //패턴 선택 기준 : 패턴 선택 타이밍때 쿨타임이 끝난 패턴중 1개 랜덤
 
+    [Tooltip("패턴 A 탄 발사 간격")]
     [Range(0, 10.0f)]
     [SerializeField] private float attackAInterval;
     [Range(0, 20.0f)]
